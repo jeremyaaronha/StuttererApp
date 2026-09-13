@@ -8,6 +8,6 @@ James Burdick quote:
 "...whatever principle of intelligence we attain unto this life, it will rise will us in the resurrection..." Dyc 130:18
 
 Raphael Shawn Taurai
-"......"
+"...Fools hate knowledge" Proverbs 1:22
 
 
