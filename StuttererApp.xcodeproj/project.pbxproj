@@ -6,6 +6,10 @@
 	objectVersion = 77;
 	objects = {
 
+/* Begin PBXBuildFile section */
+		F1AE00012F9000000000A001 /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = F1AE00032F9000000000A001 /* FirebaseAuth */; };
+/* End PBXBuildFile section */
+
 /* Begin PBXFileReference section */
 		DB1758952F8DD32D008BC1CA /* StuttererApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = StuttererApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -36,6 +40,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F1AE00012F9000000000A001 /* FirebaseAuth in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -78,6 +83,7 @@
 			);
 			name = StuttererApp;
 			packageProductDependencies = (
+				F1AE00032F9000000000A001 /* FirebaseAuth */,
 			);
 			productName = StuttererApp;
 			productReference = DB1758952F8DD32D008BC1CA /* StuttererApp.app */;
@@ -107,6 +113,9 @@
 			);
 			mainGroup = DB17588C2F8DD32D008BC1CA;
 			minimizedProjectReferenceProxies = 1;
+			packageReferences = (
+				F1AE00022F9000000000A001 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
+			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = DB1758962F8DD32D008BC1CA /* Products */;
 			projectDirPath = "";
@@ -349,6 +358,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		F1AE00022F9000000000A001 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/firebase/firebase-ios-sdk";
+			requirement = {
+				kind = exactVersion;
+				version = 12.14.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		F1AE00032F9000000000A001 /* FirebaseAuth */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = F1AE00022F9000000000A001 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseAuth;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = DB17588D2F8DD32D008BC1CA /* Project object */;
 }

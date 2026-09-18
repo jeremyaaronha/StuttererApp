@@ -5,6 +5,9 @@ struct ContentView: View {
     // controls the audio manager
     @StateObject private var audioManager = AudioManager()
     
+    // shared login state, used to sign out
+    @EnvironmentObject private var auth: AuthManager
+    
     var body: some View {
         
         // creates main background layout
@@ -62,6 +65,23 @@ struct ContentView: View {
                             .shadow(radius: 10)
                     }
                 }
+            }
+            
+            // sign out button in the top corner
+            VStack {
+                HStack {
+                    Spacer()
+                    Button("Sign Out") {
+                        // stops the mic before leaving the screen
+                        if audioManager.isRunning {
+                            audioManager.toggleAudio()
+                        }
+                        auth.signOut()
+                    }
+                    .foregroundColor(.white)
+                    .padding()
+                }
+                Spacer()
             }
         }
     }
