@@ -21,6 +21,9 @@ final class AuthManager: ObservableObject {
     // message shown to the user when something goes wrong
     @Published var errorMessage: String?
 
+    // message shown after something worked, like a password reset email
+    @Published var infoMessage: String?
+
     // true while waiting for firebase
     @Published private(set) var isLoading = false
 
@@ -34,16 +37,36 @@ final class AuthManager: ObservableObject {
         isConfigured = FirebaseApp.app() != nil
         guard isConfigured else { return }
 
-        // firebase saves the session on the phone, so this fires on launch
-        // with the saved user and again whenever they sign in or out
+        // firebase has already restored any saved session by the time
+        // FirebaseApp.configure() returns, so read it now. without this the
+        // login screen flashes on every launch before the listener catches up.
+        apply(Auth.auth().currentUser)
+
+        // fires whenever they sign in or out from here on
         authListener = Auth.auth().addStateDidChangeListener { [weak self] _, user in
-            let email = user?.email
-            let signedIn = user != nil
             Task { @MainActor in
-                self?.isSignedIn = signedIn
-                self?.userEmail = email
+                self?.apply(user)
             }
         }
+    }
+
+    // stops firebase holding on to the listener after this object goes away
+    deinit {
+        if let authListener {
+            Auth.auth().removeStateDidChangeListener(authListener)
+        }
+    }
+
+    // shows a validation error and drops any leftover success message
+    private func fail(_ text: String) {
+        errorMessage = text
+        infoMessage = nil
+    }
+
+    // copies the firebase user into the published properties
+    private func apply(_ user: User?) {
+        isSignedIn = user != nil
+        userEmail = user?.email
     }
 
     // creates a new account
@@ -54,7 +77,7 @@ final class AuthManager: ObservableObject {
         if let error = AuthValidator.emailError(email)
             ?? AuthValidator.passwordError(password)
             ?? AuthValidator.confirmError(password, confirmPassword) {
-            errorMessage = error
+            fail(error)
             return
         }
 
@@ -69,11 +92,11 @@ final class AuthManager: ObservableObject {
 
         // only checks the basics here, firebase decides if the login is right
         if let error = AuthValidator.emailError(email) {
-            errorMessage = error
+            fail(error)
             return
         }
         if password.isEmpty {
-            errorMessage = "Please enter your password."
+            fail("Please enter your password.")
             return
         }
 
@@ -85,6 +108,11 @@ final class AuthManager: ObservableObject {
     // logs the user out
     func signOut() {
         guard isConfigured else { return }
+
+        // otherwise an old error is still on screen at the login page
+        errorMessage = nil
+        infoMessage = nil
+
         do {
             try Auth.auth().signOut()
         } catch {
@@ -92,21 +120,46 @@ final class AuthManager: ObservableObject {
         }
     }
 
-    // runs a firebase call with a loading state and friendly errors
-    private func run(_ action: () async throws -> Void) async {
-        guard isConfigured else {
-            errorMessage = "Firebase isn't set up yet. Add GoogleService-Info.plist to the project."
+    // emails a reset link, firebase hosts the page that changes the password
+    func resetPassword(email: String) async {
+        let email = email.trimmingCharacters(in: .whitespacesAndNewlines)
+
+        if let error = AuthValidator.emailError(email) {
+            fail(error)
             return
         }
 
+        let sent = await run {
+            try await Auth.auth().sendPasswordReset(withEmail: email)
+        }
+
+        // firebase says nothing about whether the address exists, so that
+        // an attacker can't use this to find out who has an account
+        if sent {
+            infoMessage = "If that email has an account, a reset link is on its way."
+        }
+    }
+
+    // runs a firebase call with a loading state and friendly errors,
+    // returning true when it worked
+    @discardableResult
+    private func run(_ action: () async throws -> Void) async -> Bool {
+        guard isConfigured else {
+            errorMessage = "Firebase isn't set up yet. Add GoogleService-Info.plist to the project."
+            return false
+        }
+
         errorMessage = nil
+        infoMessage = nil
         isLoading = true
         defer { isLoading = false }
 
         do {
             try await action()
+            return true
         } catch {
             errorMessage = message(for: error)
+            return false
         }
     }
 
@@ -121,6 +174,8 @@ final class AuthManager: ObservableObject {
             return "An account with this email already exists."
         case .weakPassword:
             return "That password is too weak. Try a longer one."
+        case .invalidRecipientEmail:
+            return "Please enter a valid email address."
         case .userDisabled:
             return "This account has been disabled."
         case .tooManyRequests:

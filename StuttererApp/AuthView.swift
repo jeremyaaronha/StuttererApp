@@ -73,6 +73,14 @@ struct AuthView: View {
                         .multilineTextAlignment(.center)
                 }
 
+                // shows when something worked, like the reset email
+                if let info = auth.infoMessage {
+                    Text(info)
+                        .font(.callout)
+                        .foregroundColor(.green)
+                        .multilineTextAlignment(.center)
+                }
+
                 // sign in or sign up button
                 Button(action: submit) {
                     ZStack {
@@ -92,14 +100,34 @@ struct AuthView: View {
                 .disabled(auth.isLoading)
                 .padding(.top, 10)
 
+                // sends a reset link, only useful when signing in
+                if !isSignUp {
+                    Button("Forgot password?") {
+                        Task { await auth.resetPassword(email: email) }
+                    }
+                    .font(.footnote)
+                    .foregroundColor(.cyan)
+                    .disabled(auth.isLoading)
+                }
+
                 // switches between sign in and sign up
                 Button(isSignUp ? "Already have an account? Sign in"
                                 : "Don't have an account? Sign up") {
                     isSignUp.toggle()
                     confirmPassword = ""
                     auth.errorMessage = nil
+                    auth.infoMessage = nil
                 }
                 .foregroundColor(.cyan)
+
+                // warns right away instead of waiting for a button tap
+                if !auth.isConfigured {
+                    Text("Firebase isn't set up yet. Add GoogleService-Info.plist to the project.")
+                        .font(.footnote)
+                        .foregroundColor(.yellow)
+                        .multilineTextAlignment(.center)
+                        .padding(.top, 10)
+                }
             }
             .padding(.horizontal, 30)
         }
