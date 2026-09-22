@@ -33,7 +33,10 @@
     <string>This app needs microphone access for real-time speech feedback.</string>
 
     <key>UILaunchScreen</key>
-    <dict/>
+    <dict>
+        <key>UIColorName</key>
+        <string>LaunchBackground</string>
+    </dict>
 
     <key>UIBackgroundModes</key>
     <array>
