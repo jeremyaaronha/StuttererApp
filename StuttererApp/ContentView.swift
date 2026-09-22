@@ -7,7 +7,6 @@ struct ContentView: View {
     
     // shared login state, used to sign out
     @EnvironmentObject private var auth: AuthManager
-    
     var body: some View {
         
         // creates main background layout
@@ -83,6 +82,9 @@ struct ContentView: View {
                 }
                 Spacer()
             }
+        }
+        .onAppear {
+            audioManager.loadSettings(for: auth.userID ?? "guest")
         }
     }
 }

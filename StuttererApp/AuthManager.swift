@@ -18,6 +18,8 @@ final class AuthManager: ObservableObject {
     // email of the logged in user
     @Published private(set) var userEmail: String?
 
+    @Published private(set) var userID: String?
+
     // message shown to the user when something goes wrong
     @Published var errorMessage: String?
 
@@ -67,6 +69,7 @@ final class AuthManager: ObservableObject {
     private func apply(_ user: User?) {
         isSignedIn = user != nil
         userEmail = user?.email
+        userID = user?.uid
     }
 
     // creates a new account
