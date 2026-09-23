@@ -1,5 +1,6 @@
 import SwiftUI
 
+
 struct ContentView: View {
     
     // controls the audio
@@ -109,5 +110,19 @@ struct ContentView: View {
                 }
             }
         }
+    }
+}
+
+// newer xcode 15 plus only uncomment this and delete the ContentView_Previews below to use the modern preview macro
+// #Preview {
+//     ContentView()
+//         .environmentObject(AppState())
+// }
+
+// xcode 14 compatible preview
+struct ContentView_Previews: PreviewProvider {
+    static var previews: some View {
+        ContentView()
+            .environmentObject(AppState())
     }
 }
