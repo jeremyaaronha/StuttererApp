@@ -23,6 +23,7 @@ final class AudioManager: ObservableObject {
     @Published var delayTime1: Double = 0.25 {
         didSet {
             delayNode1.delayTime = delayTime1
+            saveSettings()
         }
     }
 
@@ -30,13 +31,14 @@ final class AudioManager: ObservableObject {
     @Published var delayTime2: Double = 0.30 {
         didSet {
             delayNode2.delayTime = delayTime2
+            saveSettings()
         }
     }
-
     // voice effect value
     @Published var voiceEffect: Float = 0 {
         didSet {
             updateVoiceEffect()
+            saveSettings()
         }
     }
 
@@ -44,16 +46,113 @@ final class AudioManager: ObservableObject {
     @Published var voice2Volume: Float = 0.7 {
         didSet {
             voice2Mixer.volume = voice2Volume
+            saveSettings()
         }
     }
 
     // audio status
     @Published var isRunning = false
+    
+    // current user settings
+    private var userID: String?
+
+    // prevents saving while loading settings
+    private var isLoadingSettings = false
 
     init() {
         configureSession()
         configureEQ()
         configureEngine()
+    }
+    
+    // loads saved audio settings for the current user
+    func loadSettings(for userID: String) {
+
+        self.userID = userID
+
+        isLoadingSettings = true
+
+        let defaults = UserDefaults.standard
+
+
+        if defaults.object(forKey: delayTime1Key) != nil {
+            delayTime1 = defaults.double(forKey: delayTime1Key)
+        }
+
+
+        if defaults.object(forKey: delayTime2Key) != nil {
+            delayTime2 = defaults.double(forKey: delayTime2Key)
+        }
+
+
+        if defaults.object(forKey: voiceEffectKey) != nil {
+            voiceEffect = defaults.float(forKey: voiceEffectKey)
+        }
+
+
+        if defaults.object(forKey: voice2VolumeKey) != nil {
+            voice2Volume = defaults.float(forKey: voice2VolumeKey)
+        }
+
+
+        isLoadingSettings = false
+    }
+
+
+
+    // saves audio settings
+    private func saveSettings() {
+
+        guard !isLoadingSettings,
+              userID != nil else {
+            return
+        }
+
+
+        let defaults = UserDefaults.standard
+
+
+        defaults.set(
+            delayTime1,
+            forKey: delayTime1Key
+        )
+
+
+        defaults.set(
+            delayTime2,
+            forKey: delayTime2Key
+        )
+
+
+        defaults.set(
+            voiceEffect,
+            forKey: voiceEffectKey
+        )
+
+
+        defaults.set(
+            voice2Volume,
+            forKey: voice2VolumeKey
+        )
+    }
+    
+    private var delayTime1Key: String {
+        "delayTime1_\(userID ?? "guest")"
+    }
+
+
+    private var delayTime2Key: String {
+        "delayTime2_\(userID ?? "guest")"
+    }
+
+
+    private var voiceEffectKey: String {
+        "voiceEffect_\(userID ?? "guest")"
+    }
+
+
+    private var voice2VolumeKey: String {
+        "voice2Volume_\(userID ?? "guest")"
     }
 
     private func configureSession() {

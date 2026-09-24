@@ -5,16 +5,44 @@
 //
 
 import SwiftUI
+import FirebaseCore
 
 @main
 struct StuttererAppApp: App {
 
     @StateObject private var appState = AppState()
 
+    @StateObject private var auth: AuthManager
+
+    init() {
+
+        if Bundle.main.path(
+            forResource: "GoogleService-Info",
+            ofType: "plist"
+        ) != nil {
+
+            FirebaseApp.configure()
+        }
+
+        _auth = StateObject(
+            wrappedValue: AuthManager()
+        )
+    }
+
     var body: some Scene {
+
         WindowGroup {
-            ContentView()
-                .environmentObject(appState)
+
+            Group {
+
+                if auth.isSignedIn {
+                    ContentView()
+                } else {
+                    AuthView()
+                }
+            }
+            .environmentObject(appState)
+            .environmentObject(auth)
         }
     }
 }
