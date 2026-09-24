@@ -38,7 +38,15 @@ struct ControlsView: View {
 
                                 Slider(
                                     value: $audioManager.delayTime1,
-                                    in: 0...0.5
+                                    in: AudioManager.delayRange,
+                                    onEditingChanged: { isDragging in
+
+                                        // one write when the drag ends,
+                                        // not one per frame
+                                        if !isDragging {
+                                            audioManager.saveSettings()
+                                        }
+                                    }
                                 )
                                 .tint(.cyan)
                             }
@@ -54,7 +62,15 @@ struct ControlsView: View {
 
                                 Slider(
                                     value: $audioManager.delayTime2,
-                                    in: 0...0.5
+                                    in: AudioManager.delayRange,
+                                    onEditingChanged: { isDragging in
+
+                                        // one write when the drag ends,
+                                        // not one per frame
+                                        if !isDragging {
+                                            audioManager.saveSettings()
+                                        }
+                                    }
                                 )
                                 .tint(.cyan)
                             }
@@ -67,7 +83,15 @@ struct ControlsView: View {
 
                                 Slider(
                                     value: $audioManager.voiceEffect,
-                                    in: -20...20
+                                    in: AudioManager.voiceEffectRange,
+                                    onEditingChanged: { isDragging in
+
+                                        // one write when the drag ends,
+                                        // not one per frame
+                                        if !isDragging {
+                                            audioManager.saveSettings()
+                                        }
+                                    }
                                 )
                                 .tint(.orange)
                             }
@@ -80,7 +104,15 @@ struct ControlsView: View {
 
                                 Slider(
                                     value: $audioManager.voice2Volume,
-                                    in: 0...1
+                                    in: AudioManager.voice2VolumeRange,
+                                    onEditingChanged: { isDragging in
+
+                                        // one write when the drag ends,
+                                        // not one per frame
+                                        if !isDragging {
+                                            audioManager.saveSettings()
+                                        }
+                                    }
                                 )
                                 .tint(.purple)
                             }

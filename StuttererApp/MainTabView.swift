@@ -6,6 +6,9 @@ struct MainTabView: View {
     @EnvironmentObject private var appState: AppState
     @EnvironmentObject private var auth: AuthManager
 
+    // lets us save if the app is backgrounded or killed mid-session
+    @Environment(\.scenePhase) private var scenePhase
+
     @StateObject private var audioManager = AudioManager()
 
 
@@ -65,6 +68,14 @@ struct MainTabView: View {
             audioManager.loadSettings(
                 for: auth.userID ?? "guest"
             )
+        }
+        .onChange(of: scenePhase) { _, newPhase in
+
+            // a drag that never ended, or an app about to be killed in the
+            // background, would otherwise lose the last change
+            if newPhase != .active {
+                audioManager.saveSettings()
+            }
         }
     }
 }

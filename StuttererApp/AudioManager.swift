@@ -19,11 +19,16 @@ final class AudioManager: ObservableObject {
     // controls second voice volume
     private let voice2Mixer = AVAudioMixerNode()
 
+    // ranges the sliders are drawn with, kept here so a stored value can
+    // never fall outside the track the user sees
+    static let delayRange: ClosedRange<Double> = 0...0.5
+    static let voiceEffectRange: ClosedRange<Float> = -20...20
+    static let voice2VolumeRange: ClosedRange<Float> = 0...1
+
     // first voice delay
     @Published var delayTime1: Double = 0.25 {
         didSet {
             delayNode1.delayTime = delayTime1
-            saveSettings()
         }
     }
 
@@ -31,14 +36,12 @@ final class AudioManager: ObservableObject {
     @Published var delayTime2: Double = 0.30 {
         didSet {
             delayNode2.delayTime = delayTime2
-            saveSettings()
         }
     }
     // voice effect value
     @Published var voiceEffect: Float = 0 {
         didSet {
             updateVoiceEffect()
-            saveSettings()
         }
     }
 
@@ -46,7 +49,6 @@ final class AudioManager: ObservableObject {
     @Published var voice2Volume: Float = 0.7 {
         didSet {
             voice2Mixer.volume = voice2Volume
-            saveSettings()
         }
     }
 
@@ -55,9 +57,6 @@ final class AudioManager: ObservableObject {
     
     // current user settings
     private var userID: String?
-
-    // prevents saving while loading settings
-    private var isLoadingSettings = false
 
     init() {
         configureSession()
@@ -70,41 +69,42 @@ final class AudioManager: ObservableObject {
 
         self.userID = userID
 
-        isLoadingSettings = true
-
         let defaults = UserDefaults.standard
 
 
         if defaults.object(forKey: delayTime1Key) != nil {
             delayTime1 = defaults.double(forKey: delayTime1Key)
+                .clamped(to: Self.delayRange)
         }
 
 
         if defaults.object(forKey: delayTime2Key) != nil {
             delayTime2 = defaults.double(forKey: delayTime2Key)
+                .clamped(to: Self.delayRange)
         }
 
 
         if defaults.object(forKey: voiceEffectKey) != nil {
             voiceEffect = defaults.float(forKey: voiceEffectKey)
+                .clamped(to: Self.voiceEffectRange)
         }
 
 
         if defaults.object(forKey: voice2VolumeKey) != nil {
             voice2Volume = defaults.float(forKey: voice2VolumeKey)
+                .clamped(to: Self.voice2VolumeRange)
         }
-
-
-        isLoadingSettings = false
     }
 
 
 
-    // saves audio settings
-    private func saveSettings() {
+    // saves audio settings. called when a slider drag ends, on reset, and
+    // when the app leaves the foreground, rather than from the didSet blocks
+    // above, which would write on every frame of a drag. does nothing until
+    // loadSettings has said who is signed in.
+    func saveSettings() {
 
-        guard !isLoadingSettings,
-              userID != nil else {
+        guard userID != nil else {
             return
         }
 
@@ -362,5 +362,15 @@ final class AudioManager: ObservableObject {
         delayTime2 = 0.30
         voiceEffect = 0
         voice2Volume = 0.7
+
+        // the didSet blocks no longer save, so the reset has to say so itself
+        saveSettings()
+    }
+}
+
+// keeps a value that came back from storage inside the range the UI expects
+private extension Comparable {
+    func clamped(to range: ClosedRange<Self>) -> Self {
+        min(max(self, range.lowerBound), range.upperBound)
     }
 }
