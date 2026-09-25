@@ -37,10 +37,12 @@ final class AppState: ObservableObject {
         isSignedIn = true
     }
 
-    // called by the profile screen sign out button
+    // called by the sign out buttons after AuthManager signs out,
+    // so the next person to sign in starts on the practice tab with the menu closed
     func signOut() {
         isSignedIn = false
         selectedTab = .practice
+        isMenuOpen = false
     }
 }
 

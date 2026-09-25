@@ -355,6 +355,15 @@ final class AudioManager: ObservableObject {
         }
     }
 
+    // turns the mic off, used when the user signs out
+    func stopAudio() {
+
+        if audioEngine.isRunning {
+            audioEngine.stop()
+        }
+        isRunning = false
+    }
+
     func resetSettings() {
 
         // resets the values

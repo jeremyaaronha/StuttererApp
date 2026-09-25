@@ -4,6 +4,7 @@ import SwiftUI
 // sign out returns to the welcome screen menu items are navigation targets for later sprints
 struct ProfileView: View {
     @EnvironmentObject private var appState: AppState
+    @EnvironmentObject private var auth: AuthManager
 
     // placeholder menu rows
     private let menuItems: [(title: String, systemImage: String)] = [
@@ -56,8 +57,11 @@ struct ProfileView: View {
                         }
                     }
 
-                    // sign out returns to the welcome screen
-                    Button(action: appState.signOut) {
+                    // signs out of firebase, which sends the app back to the login screen
+                    Button {
+                        auth.signOut()
+                        appState.signOut()
+                    } label: {
                         Label("Sign Out", systemImage: "arrow.right.square")
                             .font(.headline)
                             .frame(maxWidth: .infinity)
@@ -82,6 +86,7 @@ struct ProfileView_Previews: PreviewProvider {
     static var previews: some View {
         ProfileView()
             .environmentObject(AppState())
+            .environmentObject(AuthManager())
             .preferredColorScheme(.dark)
     }
 }

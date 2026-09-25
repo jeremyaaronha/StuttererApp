@@ -69,6 +69,13 @@ struct MainTabView: View {
                 for: auth.userID ?? "guest"
             )
         }
+        .onDisappear {
+
+            // signing out removes this screen, so save this user's settings
+            // and stop the mic before the next person signs in
+            audioManager.saveSettings()
+            audioManager.stopAudio()
+        }
         .onChange(of: scenePhase) { _, newPhase in
 
             // a drag that never ended, or an app about to be killed in the
