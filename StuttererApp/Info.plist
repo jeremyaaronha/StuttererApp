@@ -29,6 +29,18 @@
     <key>CFBundleVersion</key>
     <string>$(CURRENT_PROJECT_VERSION)</string>
 
+    <key>CFBundleURLTypes</key>
+    <array>
+        <dict>
+            <key>CFBundleTypeRole</key>
+            <string>Editor</string>
+            <key>CFBundleURLSchemes</key>
+            <array>
+                <string>com.googleusercontent.apps.208797296134-p972i6j6u8ql4td2j1gc8vok0abeeuiv</string>
+            </array>
+        </dict>
+    </array>
+
     <key>NSMicrophoneUsageDescription</key>
     <string>This app needs microphone access for real-time speech feedback.</string>
 
