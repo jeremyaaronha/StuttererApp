@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		DBBD95BF306602D50030DEE8 /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = DBBD95BE306602D50030DEE8 /* FirebaseFirestore */; };
 		F1AE00012F9000000000A001 /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = F1AE00032F9000000000A001 /* FirebaseAuth */; };
 		F1AE00042F9000000000A001 /* GoogleSignIn in Frameworks */ = {isa = PBXBuildFile; productRef = F1AE00062F9000000000A001 /* GoogleSignIn */; };
 /* End PBXBuildFile section */
@@ -43,6 +44,7 @@
 			files = (
 				F1AE00012F9000000000A001 /* FirebaseAuth in Frameworks */,
 				F1AE00042F9000000000A001 /* GoogleSignIn in Frameworks */,
+				DBBD95BF306602D50030DEE8 /* FirebaseFirestore in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -53,6 +55,7 @@
 			isa = PBXGroup;
 			children = (
 				DB1758972F8DD32D008BC1CA /* StuttererApp */,
+				DBBD95BD306602D50030DEE8 /* Frameworks */,
 				DB1758962F8DD32D008BC1CA /* Products */,
 			);
 			sourceTree = "<group>";
@@ -63,6 +66,13 @@
 				DB1758952F8DD32D008BC1CA /* StuttererApp.app */,
 			);
 			name = Products;
+			sourceTree = "<group>";
+		};
+		DBBD95BD306602D50030DEE8 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -87,6 +97,7 @@
 			packageProductDependencies = (
 				F1AE00032F9000000000A001 /* FirebaseAuth */,
 				F1AE00062F9000000000A001 /* GoogleSignIn */,
+				DBBD95BE306602D50030DEE8 /* FirebaseFirestore */,
 			);
 			productName = StuttererApp;
 			productReference = DB1758952F8DD32D008BC1CA /* StuttererApp.app */;
@@ -383,6 +394,11 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		DBBD95BE306602D50030DEE8 /* FirebaseFirestore */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = F1AE00022F9000000000A001 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseFirestore;
+		};
 		F1AE00032F9000000000A001 /* FirebaseAuth */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = F1AE00022F9000000000A001 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
