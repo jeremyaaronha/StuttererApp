@@ -1,90 +1,53 @@
 import SwiftUI
 
 struct ContentView: View {
-    
-    // controls the audio manager
-    @StateObject private var audioManager = AudioManager()
-    
-    // shared login state, used to sign out
+
+    @EnvironmentObject private var appState: AppState
     @EnvironmentObject private var auth: AuthManager
+
+    @State private var showSplash = true
+
     var body: some View {
-        
-        // creates main background layout
+
         ZStack {
-            
-            // creates app background
-            LinearGradient(
-                colors: [Color.black, Color.blue.opacity(0.6)],
-                startPoint: .top,
-                endPoint: .bottom
-            )
-            .ignoresSafeArea()
-            
-            // organizes app elements vertically
-            VStack(spacing: 50) {
-                
-                // title
-                Text("Mic Monitor")
-                    .font(.system(size: 32, weight: .bold))
-                    .foregroundColor(.white)
-                
-                VStack(spacing: 20) {
-                    
-                    // shows current delay time
-                    Text("Delay: \(audioManager.delayTime, specifier: "%.2f") s")
-                        .foregroundColor(.white)
-                    
-                    // changes voice delay
-                    Slider(value: $audioManager.delayTime,
-                           in: 0...0.5)
-                    .accentColor(.cyan)
-                    .padding(.horizontal)
-                    
-                    // shows tone option
-                    Text("Tone")
-                        .foregroundColor(.white)
-                    
-                    // changes voice tone
-                    Slider(value: $audioManager.toneAmount,
-                           in: -20...20)
-                    .accentColor(.orange)
-                    .padding(.horizontal)
-                    
-                    // button to start or stop
-                    Button(action: {
-                        audioManager.toggleAudio()
-                    }) {
-                        // changes button text depending on status
-                        Text(audioManager.isRunning ? "Stop" : "Start")
-                            .font(.system(size: 22, weight: .bold))
-                            .frame(width: 200, height: 60)
-                            .background(audioManager.isRunning ? Color.red : Color.green)
-                            .foregroundColor(.white)
-                            .cornerRadius(30)
-                            .shadow(radius: 10)
-                    }
-                }
+
+            if auth.isSignedIn {
+                MainTabView()
+            } else {
+                WelcomeView()
             }
-            
-            // sign out button in the top corner
-            VStack {
-                HStack {
-                    Spacer()
-                    Button("Sign Out") {
-                        // stops the mic before leaving the screen
-                        if audioManager.isRunning {
-                            audioManager.toggleAudio()
-                        }
-                        auth.signOut()
-                    }
-                    .foregroundColor(.white)
-                    .padding()
-                }
-                Spacer()
+
+            if showSplash {
+                SplashView()
+                    .transition(.opacity)
+                    .zIndex(1)
             }
         }
+        .preferredColorScheme(.dark)
         .onAppear {
-            audioManager.loadSettings(for: auth.userID ?? "guest")
+
+            DispatchQueue.main.asyncAfter(
+                deadline: .now() + 3
+            ) {
+
+                withAnimation(
+                    .easeInOut(duration: 0.5)
+                ) {
+                    showSplash = false
+                }
+            }
         }
+    }
+}
+
+
+struct ContentView_Previews: PreviewProvider {
+
+    static var previews: some View {
+
+        ContentView()
+            .environmentObject(AppState())
+            .environmentObject(AuthManager())
+            .preferredColorScheme(.dark)
     }
 }
