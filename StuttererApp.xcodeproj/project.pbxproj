@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		F1AE00012F9000000000A001 /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = F1AE00032F9000000000A001 /* FirebaseAuth */; };
+		F1AE00042F9000000000A001 /* GoogleSignIn in Frameworks */ = {isa = PBXBuildFile; productRef = F1AE00062F9000000000A001 /* GoogleSignIn */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -41,6 +42,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				F1AE00012F9000000000A001 /* FirebaseAuth in Frameworks */,
+				F1AE00042F9000000000A001 /* GoogleSignIn in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -84,6 +86,7 @@
 			name = StuttererApp;
 			packageProductDependencies = (
 				F1AE00032F9000000000A001 /* FirebaseAuth */,
+				F1AE00062F9000000000A001 /* GoogleSignIn */,
 			);
 			productName = StuttererApp;
 			productReference = DB1758952F8DD32D008BC1CA /* StuttererApp.app */;
@@ -115,6 +118,7 @@
 			minimizedProjectReferenceProxies = 1;
 			packageReferences = (
 				F1AE00022F9000000000A001 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
+				F1AE00052F9000000000A001 /* XCRemoteSwiftPackageReference "GoogleSignIn-iOS" */,
 			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = DB1758962F8DD32D008BC1CA /* Products */;
@@ -368,6 +372,14 @@
 				version = 12.14.0;
 			};
 		};
+		F1AE00052F9000000000A001 /* XCRemoteSwiftPackageReference "GoogleSignIn-iOS" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/google/GoogleSignIn-iOS";
+			requirement = {
+				kind = exactVersion;
+				version = 9.2.0;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -375,6 +387,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = F1AE00022F9000000000A001 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
 			productName = FirebaseAuth;
+		};
+		F1AE00062F9000000000A001 /* GoogleSignIn */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = F1AE00052F9000000000A001 /* XCRemoteSwiftPackageReference "GoogleSignIn-iOS" */;
+			productName = GoogleSignIn;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

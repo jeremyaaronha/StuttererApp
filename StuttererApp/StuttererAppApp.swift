@@ -6,6 +6,7 @@
 
 import SwiftUI
 import FirebaseCore
+import GoogleSignIn
 
 @main
 struct StuttererAppApp: App {
@@ -43,6 +44,9 @@ struct StuttererAppApp: App {
             }
             .environmentObject(appState)
             .environmentObject(auth)
+            .onOpenURL { url in
+                GIDSignIn.sharedInstance.handle(url)
+            }
         }
     }
 }
