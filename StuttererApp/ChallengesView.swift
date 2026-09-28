@@ -1,60 +1,94 @@
 import SwiftUI
 
-// optional sprint 4 enhancement speech sound challenges
-// placeholder for now just a black screen with a way to navigate back
-// the real feature th sh ch practice etc will be built later if possible
+// speech sound challenges tab
+// lists every target sound and routes into its challenge grid
 struct ChallengesView: View {
-    @EnvironmentObject private var appState: AppState
+
+    @EnvironmentObject private var auth: AuthManager
+    @StateObject private var progress = ChallengeProgressStore()
 
     var body: some View {
-        ZStack {
-            Theme.background.ignoresSafeArea()
+        NavigationStack {
+            ZStack {
+                Theme.background.ignoresSafeArea()
 
-            VStack(spacing: 20) {
+                ScrollView {
+                    VStack(spacing: 20) {
 
-                ScreenHeader(title: "Challenges", subtitle: "SPEECH SOUND PRACTICE")
+                        ScreenHeader(
+                            title: "StuttererApp",
+                            subtitle: "CHALLENGE SOUNDS"
+                        )
 
-                Spacer()
+                        GlassCard {
+                            VStack(alignment: .leading, spacing: 8) {
+                                Text("Choose a Sound")
+                                    .font(.headline)
+                                Text("Select a target sound below to start specialised fluency-building speech loops.")
+                                    .font(.subheadline)
+                                    .foregroundColor(.secondary)
+                            }
+                        }
 
-                Image(systemName: "quote.bubble")
-                    .font(.system(size: 56))
-                    .foregroundColor(Theme.accent)
-
-                Text("Speech Sound Challenges")
-                    .font(.title2.weight(.bold))
-                    .foregroundColor(.white)
-
-                Text("Optional enhancement coming in a later sprint.")
-                    .font(.subheadline)
-                    .foregroundColor(.secondary)
-                    .multilineTextAlignment(.center)
-
-                // navigation back to the practice home
-                Button {
-                    appState.selectedTab = .practice
-                } label: {
-                    Label("Back to Practice", systemImage: "arrow.left")
-                        .font(.headline)
-                        .padding(.horizontal, 24)
-                        .padding(.vertical, 14)
-                        .background(Theme.accentGradient)
-                        .foregroundColor(.white)
-                        .clipShape(Capsule())
+                        ForEach(SpeechCatalog.sounds) { sound in
+                            NavigationLink {
+                                ChallengeGridView(sound: sound)
+                                    .environmentObject(progress)
+                            } label: {
+                                soundRow(sound)
+                            }
+                            .buttonStyle(.plain)
+                        }
+                    }
+                    .padding(24)
                 }
-                .padding(.top, 8)
+            }
+            .navigationBarHidden(true)
+        }
+        .onAppear {
+            progress.load(for: auth.userID ?? "guest")
+        }
+    }
+
+    // a single sound row with its badge, name, and completion count
+    private func soundRow(_ sound: SpeechSound) -> some View {
+        let completed = progress.completedCount(for: sound)
+        let total = sound.challenges.count
+
+        return GlassCard {
+            HStack(spacing: 16) {
+
+                Text(sound.symbol)
+                    .font(.headline.weight(.bold))
+                    .foregroundColor(Theme.accent)
+                    .frame(width: 48, height: 48)
+                    .background(Theme.accent.opacity(0.15))
+                    .clipShape(RoundedRectangle(cornerRadius: 12, style: .continuous))
+
+                VStack(alignment: .leading, spacing: 4) {
+                    Text(sound.name)
+                        .font(.subheadline.weight(.semibold))
+                        .foregroundColor(.white)
+                    Text("\(completed) of \(total) completed")
+                        .font(.caption)
+                        .foregroundColor(.secondary)
+                }
 
                 Spacer()
+
+                Image(systemName: "chevron.right")
+                    .foregroundColor(.secondary)
             }
-            .padding(24)
         }
     }
 }
 
-// preview open this file to see the challenges placeholder screen
+// preview open this file to see the challenge sounds list
 struct ChallengesView_Previews: PreviewProvider {
     static var previews: some View {
         ChallengesView()
             .environmentObject(AppState())
+            .environmentObject(AuthManager())
             .preferredColorScheme(.dark)
     }
 }
