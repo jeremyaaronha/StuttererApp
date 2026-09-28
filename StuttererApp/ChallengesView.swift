@@ -29,6 +29,7 @@ struct ChallengesView: View {
                                     .foregroundColor(.secondary)
                             }
                         }
+                        .appearCard()
 
                         ForEach(SpeechCatalog.sounds) { sound in
                             NavigationLink {
@@ -37,7 +38,8 @@ struct ChallengesView: View {
                             } label: {
                                 soundRow(sound)
                             }
-                            .buttonStyle(.plain)
+                            .buttonStyle(PressableButtonStyle())
+                            .appearCard(delay: 0.05)
                         }
                     }
                     .padding(24)

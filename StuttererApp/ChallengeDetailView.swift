@@ -13,6 +13,12 @@ struct ChallengeDetailView: View {
     let challenge: SpeechChallenge
 
     @State private var didComplete = false
+    @State private var isPulsing = false
+
+    // true once an attempt has been scored and we are no longer recording
+    private var hasResult: Bool {
+        recognizer.lastResult != nil && !recognizer.isRecording
+    }
 
     var body: some View {
         ZStack {
@@ -48,6 +54,7 @@ struct ChallengeDetailView: View {
 
                     if let result = recognizer.lastResult, !recognizer.isRecording {
                         resultCard(result)
+                            .transition(.opacity.combined(with: .scale(scale: 0.95)))
                     }
 
                     Text("Speak the sentence aloud using gentle \(sound.symbol) placement.")
@@ -58,6 +65,7 @@ struct ChallengeDetailView: View {
                     recordButton
                 }
                 .padding(24)
+                .animation(.easeInOut(duration: 0.3), value: hasResult)
             }
         }
         .navigationBarBackButtonHidden(true)
@@ -180,8 +188,20 @@ struct ChallengeDetailView: View {
             .background(recognizer.isRecording ? AnyShapeStyle(Color.red) : AnyShapeStyle(Theme.accentGradient))
             .foregroundColor(.white)
             .clipShape(Capsule())
+            .scaleEffect(isPulsing ? 1.04 : 1.0)
         }
         .disabled(recognizer.authorizationDenied)
+        .onChange(of: recognizer.isRecording) { _, recording in
+            if recording {
+                withAnimation(.easeInOut(duration: 0.8).repeatForever(autoreverses: true)) {
+                    isPulsing = true
+                }
+            } else {
+                withAnimation(.easeInOut(duration: 0.2)) {
+                    isPulsing = false
+                }
+            }
+        }
     }
 
     private func toggleRecording() {

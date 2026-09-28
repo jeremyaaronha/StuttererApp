@@ -19,10 +19,12 @@ struct PracticeView: View {
                         isMicConnected: appState.isMicConnected,
                         areHeadphonesConnected: appState.areHeadphonesConnected
                     )
+                    .appearCard()
 
                     // headphone requirement message shown when no headphones detected
                     if !appState.areHeadphonesConnected {
                         HeadphoneRequirementBanner()
+                            .appearCard(delay: 0.05)
                     }
 
                     GlassCard {
@@ -44,11 +46,12 @@ struct PracticeView: View {
                                     .foregroundColor(Theme.accent)
                                     .padding(.top, 4)
                             }
-                            .buttonStyle(.plain)
+                            .buttonStyle(PressableButtonStyle())
                             .accessibilityLabel("Play")
                         }
                         .frame(maxWidth: .infinity)
                     }
+                    .appearCard(delay: 0.1)
 
                     Button {
                         openControls()
@@ -62,6 +65,8 @@ struct PracticeView: View {
                             .clipShape(Capsule())
                             .shadow(color: Theme.start.opacity(0.4), radius: 10, x: 0, y: 4)
                     }
+                    .buttonStyle(PressableButtonStyle())
+                    .appearCard(delay: 0.15)
 
                     GlassCard {
                         HStack {
@@ -78,6 +83,7 @@ struct PracticeView: View {
                                 .foregroundColor(Theme.accent)
                         }
                     }
+                    .appearCard(delay: 0.2)
 
                 }
                 .padding(24)

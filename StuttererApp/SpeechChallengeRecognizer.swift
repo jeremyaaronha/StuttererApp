@@ -95,10 +95,9 @@ final class SpeechChallengeRecognizer: ObservableObject {
         let request = SFSpeechAudioBufferRecognitionRequest()
         request.shouldReportPartialResults = true
 
-        // keep everything on device when the phone supports it
-        if recognizer.supportsOnDeviceRecognition {
-            request.requiresOnDeviceRecognition = true
-        }
+        // prefer on-device when available, but allow server fallback so the
+        // Simulator (which lacks the on-device model) can still transcribe
+        request.requiresOnDeviceRecognition = false
         self.request = request
 
         // a fresh engine picks up the current hardware input format, avoiding a
@@ -132,10 +131,15 @@ final class SpeechChallengeRecognizer: ObservableObject {
 
         isRecording = true
 
-        task = recognizer.recognitionTask(with: request) { [weak self] result, _ in
+        task = recognizer.recognitionTask(with: request) { [weak self] result, error in
             Task { @MainActor in
                 if let result {
                     self?.transcript = result.bestTranscription.formattedString
+                }
+                if let error {
+                    // surface the reason instead of failing silently
+                    print("Speech recognition error: \(error.localizedDescription)")
+                    self?.errorMessage = "Recognition error: \(error.localizedDescription)"
                 }
             }
         }

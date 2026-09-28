@@ -39,7 +39,7 @@ struct ChallengeGridView: View {
                             } label: {
                                 challengeCard(challenge)
                             }
-                            .buttonStyle(.plain)
+                            .buttonStyle(PressableButtonStyle())
                         }
                     }
                 }
@@ -71,6 +71,7 @@ struct ChallengeGridView: View {
 
                 ProgressView(value: fraction)
                     .tint(Theme.accent)
+                    .animation(.easeInOut(duration: 0.5), value: fraction)
             }
         }
     }
@@ -90,8 +91,10 @@ struct ChallengeGridView: View {
                     if done {
                         Image(systemName: "checkmark.circle.fill")
                             .foregroundColor(.green)
+                            .transition(.scale.combined(with: .opacity))
                     }
                 }
+                .animation(.spring(response: 0.4, dampingFraction: 0.6), value: done)
 
                 Text(challenge.title)
                     .font(.subheadline.weight(.semibold))
