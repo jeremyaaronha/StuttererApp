@@ -1,7 +1,7 @@
 import SwiftUI
 
 // shows device status the headphone requirement message and a primary call to action to start a session
-// the start button is visual but has no logic connected to it
+// the practice actions route the user to the audio controls tab
 struct PracticeView: View {
     @EnvironmentObject private var appState: AppState
 
@@ -19,10 +19,12 @@ struct PracticeView: View {
                         isMicConnected: appState.isMicConnected,
                         areHeadphonesConnected: appState.areHeadphonesConnected
                     )
+                    .appearCard()
 
                     // headphone requirement message shown when no headphones detected
                     if !appState.areHeadphonesConnected {
                         HeadphoneRequirementBanner()
+                            .appearCard(delay: 0.05)
                     }
 
                     GlassCard {
@@ -36,17 +38,23 @@ struct PracticeView: View {
                                 .font(.subheadline)
                                 .foregroundColor(.secondary)
                                 .multilineTextAlignment(.center)
-                            Image(systemName: "play.circle.fill")
-                                .font(.system(size: 64))
-                                .foregroundColor(Theme.accent)
-                                .padding(.top, 4)
+                            Button {
+                                openControls()
+                            } label: {
+                                Image(systemName: "play.circle.fill")
+                                    .font(.system(size: 64))
+                                    .foregroundColor(Theme.accent)
+                                    .padding(.top, 4)
+                            }
+                            .buttonStyle(PressableButtonStyle())
+                            .accessibilityLabel("Play")
                         }
                         .frame(maxWidth: .infinity)
                     }
+                    .appearCard(delay: 0.1)
 
-                    // start session is handled by the audio feature owner
-                    // green primary action echoing the teammate original
                     Button {
+                        openControls()
                     } label: {
                         Text("Start Session")
                             .font(.headline)
@@ -57,6 +65,8 @@ struct PracticeView: View {
                             .clipShape(Capsule())
                             .shadow(color: Theme.start.opacity(0.4), radius: 10, x: 0, y: 4)
                     }
+                    .buttonStyle(PressableButtonStyle())
+                    .appearCard(delay: 0.15)
 
                     GlassCard {
                         HStack {
@@ -73,10 +83,16 @@ struct PracticeView: View {
                                 .foregroundColor(Theme.accent)
                         }
                     }
+                    .appearCard(delay: 0.2)
+
                 }
                 .padding(24)
             }
         }
+    }
+
+    private func openControls() {
+        appState.selectedTab = .controls
     }
 }
 

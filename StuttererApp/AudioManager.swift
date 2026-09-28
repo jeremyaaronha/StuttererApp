@@ -167,7 +167,7 @@ final class AudioManager: ObservableObject {
                 .playAndRecord,
                 mode: .default,
                 options: [
-                    .allowBluetooth,
+                    .allowBluetoothHFP, // renamed to HFP AFTER iOS 17
                     .allowBluetoothA2DP,
                     .defaultToSpeaker
                 ]
