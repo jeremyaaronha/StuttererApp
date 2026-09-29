@@ -1,12 +1,13 @@
 import SwiftUI
 
 // profile tab with a simple menu
-// sign out returns to the welcome screen menu items are navigation targets for later sprints
 struct ProfileView: View {
+
     @EnvironmentObject private var appState: AppState
     @EnvironmentObject private var auth: AuthManager
+    @State private var showingHelpFAQ = false
 
-    // placeholder menu rows
+    // profile menu options
     private let menuItems: [(title: String, systemImage: String)] = [
         ("Practice Board", "waveform"),
         ("Delay Tuning Engine", "slider.horizontal.3"),
@@ -26,8 +27,10 @@ struct ProfileView: View {
                         Image(systemName: "person.crop.circle.fill")
                             .font(.system(size: 64))
                             .foregroundColor(Theme.accent)
+
                         Text(appState.userName)
                             .font(.title3.weight(.bold))
+
                         Text("StuttererApp Account")
                             .font(.caption)
                             .foregroundColor(.secondary)
@@ -36,19 +39,35 @@ struct ProfileView: View {
 
                     GlassCard {
                         VStack(spacing: 0) {
-                            ForEach(Array(menuItems.enumerated()), id: \.element.title) { index, item in
-                                HStack(spacing: 14) {
-                                    Image(systemName: item.systemImage)
-                                        .foregroundColor(Theme.accent)
-                                        .frame(width: 24)
-                                    Text(item.title)
-                                        .font(.subheadline)
-                                    Spacer()
-                                    Image(systemName: "chevron.right")
-                                        .font(.caption)
-                                        .foregroundColor(.secondary)
+
+                            ForEach(
+                                Array(menuItems.enumerated()),
+                                id: \.element.title
+                            ) { index, item in
+
+                                Button {
+                                    if item.title == "Help & FAQ" {
+                                        showingHelpFAQ = true
+                                    }
+                                } label: {
+                                    HStack(spacing: 14) {
+
+                                        Image(systemName: item.systemImage)
+                                            .foregroundColor(Theme.accent)
+                                            .frame(width: 24)
+
+                                        Text(item.title)
+                                            .font(.subheadline)
+
+                                        Spacer()
+
+                                        Image(systemName: "chevron.right")
+                                            .font(.caption)
+                                            .foregroundColor(.secondary)
+                                    }
+                                    .padding(.vertical, 12)
                                 }
-                                .padding(.vertical, 12)
+                                .buttonStyle(.plain)
 
                                 if index < menuItems.count - 1 {
                                     Divider()
@@ -78,10 +97,97 @@ struct ProfileView: View {
                 .padding(24)
             }
         }
+        .sheet(isPresented: $showingHelpFAQ) {
+            HelpFAQView()
+        }
     }
 }
 
-// preview open this file to see the profile screen
+
+// help and faq screen
+struct HelpFAQView: View {
+
+    @Environment(\.dismiss) private var dismiss
+
+    var body: some View {
+        NavigationView {
+            ZStack {
+                Theme.background.ignoresSafeArea()
+
+                ScrollView {
+                    VStack(spacing: 16) {
+
+                        faqItem(
+                            question: "How do I start a practice session?",
+                            answer: "Open the Practice tab and click 'Start session'. You can adjust your voice settings from the Controls tab."
+                        )
+
+                        faqItem(
+                            question: "What are the Controls?",
+                            answer: "The Controls tab lets you adjust the delay of both voices, the voice effect, and the volume of the second voice."
+                        )
+
+                        faqItem(
+                            question: "Do I need headphones?",
+                            answer: "Yes. Headphones are required to hear the delayed voice feedback correctly and avoid audio feedback from the speaker.You can use wired or Bluetooth headphones."
+                        )
+
+                        faqItem(
+                            question: "Why does the app need microphone access?",
+                            answer: "The microphone is used to hear your voice and return the delayed audio while you practice."
+                        )
+
+                        faqItem(
+                            question: "What are saved practice texts?",
+                            answer: "You can create and save texts in the Texts tab. Your texts are saved to your account so you can use them again later."
+                        )
+
+                        faqItem(
+                            question: "What is my account used for?",
+                            answer: "Your account keeps your personal information, saved practice texts, and preferences connected to your user."
+                        )
+                    }
+                    .padding(24)
+                }
+            }
+            .navigationTitle("Help & FAQ")
+            .navigationBarTitleDisplayMode(.inline)
+            .toolbar {
+                ToolbarItem(placement: .navigationBarTrailing) {
+                    Button("Done") {
+                        dismiss()
+                    }
+                }
+            }
+        }
+    }
+
+    // shows one question and answer
+    private func faqItem(
+        question: String,
+        answer: String
+    ) -> some View {
+
+        GlassCard {
+            VStack(alignment: .leading, spacing: 8) {
+
+                Text(question)
+                    .font(.headline)
+
+                Text(answer)
+                    .font(.subheadline)
+                    .foregroundColor(.secondary)
+                    .frame(
+                        maxWidth: .infinity,
+                        alignment: .leading
+                    )
+            }
+        }
+    }
+}
+
+
+// preview for the profile screen
 struct ProfileView_Previews: PreviewProvider {
     static var previews: some View {
         ProfileView()
