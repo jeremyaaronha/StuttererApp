@@ -117,7 +117,6 @@ struct ProfileView: View {
     }
 }
 
-
 // help and faq screen
 struct HelpFAQView: View {
 
@@ -143,7 +142,9 @@ struct HelpFAQView: View {
 
                         faqItem(
                             question: "Do I need headphones?",
-                            answer: "Yes. Headphones are required to hear the delayed voice feedback correctly and avoid audio feedback from the speaker.You can use wired or Bluetooth headphones."
+                            answer: "Yes. Headphones are required to hear the delayed voice feedback "
+                                + "correctly and avoid audio feedback from the speaker. You can use wired "
+                                + "or Bluetooth headphones."
                         )
 
                         faqItem(
@@ -153,7 +154,8 @@ struct HelpFAQView: View {
 
                         faqItem(
                             question: "What are saved practice texts?",
-                            answer: "You can create and save texts in the Texts tab. Your texts are saved to your account so you can use them again later."
+                            answer: "You can create and save texts in the Texts tab. Your texts are "
+                                + "saved to your account so you can use them again later."
                         )
 
                         faqItem(
@@ -199,7 +201,6 @@ struct HelpFAQView: View {
         }
     }
 }
-
 
 // preview for the profile screen
 struct ProfileView_Previews: PreviewProvider {
