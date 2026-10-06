@@ -18,6 +18,8 @@ final class AudioManager: ObservableObject {
 
     // controls second voice volume
     private let voice2Mixer = AVAudioMixerNode()
+    
+    private let defaults: UserDefaults
 
     // first voice delay
     @Published var delayTime1: Double = 0.25 {
@@ -59,7 +61,8 @@ final class AudioManager: ObservableObject {
     // prevents saving while loading settings
     private var isLoadingSettings = false
 
-    init() {
+    init(defaults: UserDefaults = .standard) {
+        self.defaults = defaults
         configureSession()
         configureEQ()
         configureEngine()
