@@ -100,6 +100,21 @@ struct AuthView: View {
                 .disabled(auth.isLoading)
                 .padding(.top, 10)
 
+                // google makes the account the first time, so one button
+                // works for both sign in and sign up
+                Button {
+                    Task { await auth.signInWithGoogle() }
+                } label: {
+                    Text("Continue with Google")
+                        .font(.system(size: 18, weight: .semibold))
+                        .frame(width: 240, height: 50)
+                        .background(Color.white)
+                        .foregroundColor(.black)
+                        .cornerRadius(25)
+                        .shadow(radius: 10)
+                }
+                .disabled(auth.isLoading)
+
                 // sends a reset link, only useful when signing in
                 if !isSignUp {
                     Button("Forgot password?") {

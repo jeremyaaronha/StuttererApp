@@ -7,6 +7,8 @@ import Foundation
 import Combine
 import FirebaseCore
 import FirebaseAuth
+import GoogleSignIn
+import UIKit
 
 // handles sign up, sign in, sign out, and keeping the user logged in
 @MainActor
@@ -108,6 +110,53 @@ final class AuthManager: ObservableObject {
         }
     }
 
+    // signs in with a google account, and creates the firebase account
+    // the first time, so this covers both sign in and sign up
+    func signInWithGoogle() async {
+        await run {
+            // the client id comes from GoogleService-Info.plist
+            guard let clientID = FirebaseApp.app()?.options.clientID,
+                  let presenter = Self.topViewController() else { return }
+
+            GIDSignIn.sharedInstance.configuration = GIDConfiguration(clientID: clientID)
+
+            let result: GIDSignInResult
+            do {
+                result = try await GIDSignIn.sharedInstance.signIn(withPresenting: presenter)
+            } catch let error as NSError
+                where error.domain == kGIDSignInErrorDomain
+                    && error.code == GIDSignInError.canceled.rawValue {
+                // closing the google sheet isn't an error worth showing
+                return
+            }
+
+            guard let idToken = result.user.idToken?.tokenString else {
+                throw NSError(domain: AuthErrorDomain,
+                              code: AuthErrorCode.invalidCredential.rawValue)
+            }
+
+            let credential = GoogleAuthProvider.credential(
+                withIDToken: idToken,
+                accessToken: result.user.accessToken.tokenString
+            )
+            try await Auth.auth().signIn(with: credential)
+        }
+    }
+
+    // the screen google shows its sign in sheet on top of
+    private static func topViewController() -> UIViewController? {
+        let window = UIApplication.shared.connectedScenes
+            .compactMap { $0 as? UIWindowScene }
+            .flatMap(\.windows)
+            .first { $0.isKeyWindow }
+
+        var top = window?.rootViewController
+        while let presented = top?.presentedViewController {
+            top = presented
+        }
+        return top
+    }
+
     // logs the user out
     func signOut() {
         guard isConfigured else { return }
@@ -118,6 +167,9 @@ final class AuthManager: ObservableObject {
 
         do {
             try Auth.auth().signOut()
+
+            // otherwise google quietly reuses the last account next time
+            GIDSignIn.sharedInstance.signOut()
         } catch {
             errorMessage = message(for: error)
         }

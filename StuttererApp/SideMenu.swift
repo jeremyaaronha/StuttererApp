@@ -4,6 +4,7 @@ import SwiftUI
 // each item just closes the menu except sign out which returns to the welcome screen
 struct SideMenu: View {
     @EnvironmentObject private var appState: AppState
+    @EnvironmentObject private var auth: AuthManager
 
     // navigation items shown in the drawer
     // items with a tab actually navigate the rest are placeholders for now
@@ -78,9 +79,10 @@ struct SideMenu: View {
 
                 Divider().background(Color.white.opacity(0.15))
 
-                // sign out returns to the welcome screen
+                // signs out of firebase, which sends the app back to the login screen
                 Button {
                     close()
+                    auth.signOut()
                     appState.signOut()
                 } label: {
                     menuRow(title: "Sign Out", systemImage: "arrow.right.square", tint: .red)
@@ -130,6 +132,7 @@ struct SideMenu_Previews: PreviewProvider {
     static var previews: some View {
         SideMenu()
             .environmentObject(AppState())
+            .environmentObject(AuthManager())
             .preferredColorScheme(.dark)
     }
 }

@@ -4,6 +4,7 @@ import SwiftUI
 struct ProfileView: View {
 
     @EnvironmentObject private var appState: AppState
+    @EnvironmentObject private var auth: AuthManager
     @State private var showingHelpFAQ = false
 
     // profile menu options
@@ -75,18 +76,18 @@ struct ProfileView: View {
                         }
                     }
 
-                    // sign out returns to the welcome screen
-                    Button(action: appState.signOut) {
-                        Label(
-                            "Sign Out",
-                            systemImage: "arrow.right.square"
-                        )
-                        .font(.headline)
-                        .frame(maxWidth: .infinity)
-                        .padding(.vertical, 14)
-                        .background(Theme.card)
-                        .foregroundColor(.red)
-                        .clipShape(Capsule())
+                    // signs out of firebase, which sends the app back to the login screen
+                    Button {
+                        auth.signOut()
+                        appState.signOut()
+                    } label: {
+                        Label("Sign Out", systemImage: "arrow.right.square")
+                            .font(.headline)
+                            .frame(maxWidth: .infinity)
+                            .padding(.vertical, 14)
+                            .background(Theme.card)
+                            .foregroundColor(.red)
+                            .clipShape(Capsule())
                     }
 
                     Text("StuttererApp v1.0")
@@ -191,6 +192,7 @@ struct ProfileView_Previews: PreviewProvider {
     static var previews: some View {
         ProfileView()
             .environmentObject(AppState())
+            .environmentObject(AuthManager())
             .preferredColorScheme(.dark)
     }
 }
