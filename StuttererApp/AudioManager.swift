@@ -18,6 +18,8 @@ final class AudioManager: ObservableObject {
 
     // controls second voice volume
     private let voice2Mixer = AVAudioMixerNode()
+    
+    private let defaults: UserDefaults
 
     // ranges the sliders are drawn with, kept here so a stored value can
     // never fall outside the track the user sees
@@ -59,6 +61,11 @@ final class AudioManager: ObservableObject {
     private var userID: String?
 
     init() {
+    // prevents saving while loading settings
+    private var isLoadingSettings = false
+
+    init(defaults: UserDefaults = .standard) {
+        self.defaults = defaults
         configureSession()
         configureEQ()
         configureEngine()
