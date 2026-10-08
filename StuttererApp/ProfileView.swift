@@ -6,6 +6,7 @@ struct ProfileView: View {
     @EnvironmentObject private var appState: AppState
     @EnvironmentObject private var auth: AuthManager
     @State private var showingHelpFAQ = false
+    @State private var showingAboutDAF = false
 
     // profile menu options
     private let menuItems: [(title: String, systemImage: String)] = [
@@ -47,8 +48,19 @@ struct ProfileView: View {
                             ) { index, item in
 
                                 Button {
-                                    if item.title == "Help & FAQ" {
+                                    switch item.title {
+                                    case "Practice Board":
+                                        appState.selectedTab = .practice
+                                    case "Delay Tuning Engine":
+                                        appState.selectedTab = .controls
+                                    case "My Reading Library":
+                                        appState.selectedTab = .texts
+                                    case "Help & FAQ":
                                         showingHelpFAQ = true
+                                    case "About DAF Technique":
+                                        showingAboutDAF = true
+                                    default:
+                                        break
                                     }
                                 } label: {
                                     HStack(spacing: 14) {
@@ -105,9 +117,11 @@ struct ProfileView: View {
         .sheet(isPresented: $showingHelpFAQ) {
             HelpFAQView()
         }
+        .sheet(isPresented: $showingAboutDAF) {
+            AboutDAFView()
+        }
     }
 }
-
 
 // help and faq screen
 struct HelpFAQView: View {
@@ -134,7 +148,9 @@ struct HelpFAQView: View {
 
                         faqItem(
                             question: "Do I need headphones?",
-                            answer: "Yes. Headphones are required to hear the delayed voice feedback correctly and avoid audio feedback from the speaker.You can use wired or Bluetooth headphones."
+                            answer: "Yes. Headphones are required to hear the delayed voice feedback "
+                                + "correctly and avoid audio feedback from the speaker. You can use wired "
+                                + "or Bluetooth headphones."
                         )
 
                         faqItem(
@@ -144,7 +160,8 @@ struct HelpFAQView: View {
 
                         faqItem(
                             question: "What are saved practice texts?",
-                            answer: "You can create and save texts in the Texts tab. Your texts are saved to your account so you can use them again later."
+                            answer: "You can create and save texts in the Texts tab. Your texts are "
+                                + "saved to your account so you can use them again later."
                         )
 
                         faqItem(
@@ -190,7 +207,6 @@ struct HelpFAQView: View {
         }
     }
 }
-
 
 // preview for the profile screen
 struct ProfileView_Previews: PreviewProvider {
