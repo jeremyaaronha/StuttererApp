@@ -9,9 +9,21 @@
 /* Begin PBXBuildFile section */
 		DBBD95BF306602D50030DEE8 /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = DBBD95BE306602D50030DEE8 /* FirebaseFirestore */; };
 		F1AE00012F9000000000A001 /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = F1AE00032F9000000000A001 /* FirebaseAuth */; };
+		F1AE00042F9000000000A001 /* GoogleSignIn in Frameworks */ = {isa = PBXBuildFile; productRef = F1AE00062F9000000000A001 /* GoogleSignIn */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXContainerItemProxy section */
+		41C938E63071B9DF000FEDBA /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = DB17588D2F8DD32D008BC1CA /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = DB1758942F8DD32D008BC1CA;
+			remoteInfo = StuttererApp;
+		};
+/* End PBXContainerItemProxy section */
+
 /* Begin PBXFileReference section */
+		41C938E23071B9DF000FEDBA /* StuttererAppTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = StuttererAppTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		DB1758952F8DD32D008BC1CA /* StuttererApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = StuttererApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -26,6 +38,11 @@
 /* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
+		41C938E33071B9DF000FEDBA /* StuttererAppTests */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = StuttererAppTests;
+			sourceTree = "<group>";
+		};
 		DB1758972F8DD32D008BC1CA /* StuttererApp */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
 			exceptions = (
@@ -37,11 +54,19 @@
 /* End PBXFileSystemSynchronizedRootGroup section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		41C938DF3071B9DF000FEDBA /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		DB1758922F8DD32D008BC1CA /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 				F1AE00012F9000000000A001 /* FirebaseAuth in Frameworks */,
+				F1AE00042F9000000000A001 /* GoogleSignIn in Frameworks */,
 				DBBD95BF306602D50030DEE8 /* FirebaseFirestore in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -53,6 +78,7 @@
 			isa = PBXGroup;
 			children = (
 				DB1758972F8DD32D008BC1CA /* StuttererApp */,
+				41C938E33071B9DF000FEDBA /* StuttererAppTests */,
 				DBBD95BD306602D50030DEE8 /* Frameworks */,
 				DB1758962F8DD32D008BC1CA /* Products */,
 			);
@@ -62,6 +88,7 @@
 			isa = PBXGroup;
 			children = (
 				DB1758952F8DD32D008BC1CA /* StuttererApp.app */,
+				41C938E23071B9DF000FEDBA /* StuttererAppTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -76,6 +103,29 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		41C938E13071B9DF000FEDBA /* StuttererAppTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 41C938EA3071B9DF000FEDBA /* Build configuration list for PBXNativeTarget "StuttererAppTests" */;
+			buildPhases = (
+				41C938DE3071B9DF000FEDBA /* Sources */,
+				41C938DF3071B9DF000FEDBA /* Frameworks */,
+				41C938E03071B9DF000FEDBA /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				41C938E73071B9DF000FEDBA /* PBXTargetDependency */,
+			);
+			fileSystemSynchronizedGroups = (
+				41C938E33071B9DF000FEDBA /* StuttererAppTests */,
+			);
+			name = StuttererAppTests;
+			packageProductDependencies = (
+			);
+			productName = StuttererAppTests;
+			productReference = 41C938E23071B9DF000FEDBA /* StuttererAppTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 		DB1758942F8DD32D008BC1CA /* StuttererApp */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = DB1758A02F8DD331008BC1CA /* Build configuration list for PBXNativeTarget "StuttererApp" */;
@@ -83,6 +133,7 @@
 				DB1758912F8DD32D008BC1CA /* Sources */,
 				DB1758922F8DD32D008BC1CA /* Frameworks */,
 				DB1758932F8DD32D008BC1CA /* Resources */,
+				41C9391C3071C441000FEDBA /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -94,6 +145,7 @@
 			name = StuttererApp;
 			packageProductDependencies = (
 				F1AE00032F9000000000A001 /* FirebaseAuth */,
+				F1AE00062F9000000000A001 /* GoogleSignIn */,
 				DBBD95BE306602D50030DEE8 /* FirebaseFirestore */,
 			);
 			productName = StuttererApp;
@@ -107,9 +159,13 @@
 			isa = PBXProject;
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
-				LastSwiftUpdateCheck = 2640;
+				LastSwiftUpdateCheck = 2660;
 				LastUpgradeCheck = 2640;
 				TargetAttributes = {
+					41C938E13071B9DF000FEDBA = {
+						CreatedOnToolsVersion = 26.6;
+						TestTargetID = DB1758942F8DD32D008BC1CA;
+					};
 					DB1758942F8DD32D008BC1CA = {
 						CreatedOnToolsVersion = 26.4;
 					};
@@ -126,6 +182,7 @@
 			minimizedProjectReferenceProxies = 1;
 			packageReferences = (
 				F1AE00022F9000000000A001 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
+				F1AE00052F9000000000A001 /* XCRemoteSwiftPackageReference "GoogleSignIn-iOS" */,
 			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = DB1758962F8DD32D008BC1CA /* Products */;
@@ -133,11 +190,19 @@
 			projectRoot = "";
 			targets = (
 				DB1758942F8DD32D008BC1CA /* StuttererApp */,
+				41C938E13071B9DF000FEDBA /* StuttererAppTests */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		41C938E03071B9DF000FEDBA /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		DB1758932F8DD32D008BC1CA /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -147,7 +212,34 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		41C9391C3071C441000FEDBA /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "if which swiftlint > /dev/null; then\n  swiftlint\nelse\n  echo \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi\n";
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
+		41C938DE3071B9DF000FEDBA /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		DB1758912F8DD32D008BC1CA /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -157,7 +249,57 @@
 		};
 /* End PBXSourcesBuildPhase section */
 
+/* Begin PBXTargetDependency section */
+		41C938E73071B9DF000FEDBA /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = DB1758942F8DD32D008BC1CA /* StuttererApp */;
+			targetProxy = 41C938E63071B9DF000FEDBA /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
 /* Begin XCBuildConfiguration section */
+		41C938E83071B9DF000FEDBA /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 26.5;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = Rodri.StuttererAppTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				STRING_CATALOG_GENERATE_SYMBOLS = NO;
+				SWIFT_APPROACHABLE_CONCURRENCY = YES;
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/StuttererApp.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/StuttererApp";
+			};
+			name = Debug;
+		};
+		41C938E93071B9DF000FEDBA /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 26.5;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = Rodri.StuttererAppTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				STRING_CATALOG_GENERATE_SYMBOLS = NO;
+				SWIFT_APPROACHABLE_CONCURRENCY = YES;
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/StuttererApp.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/StuttererApp";
+			};
+			name = Release;
+		};
 		DB17589E2F8DD331008BC1CA /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -352,6 +494,15 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		41C938EA3071B9DF000FEDBA /* Build configuration list for PBXNativeTarget "StuttererAppTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				41C938E83071B9DF000FEDBA /* Debug */,
+				41C938E93071B9DF000FEDBA /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		DB1758902F8DD32D008BC1CA /* Build configuration list for PBXProject "StuttererApp" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
@@ -381,6 +532,14 @@
 				version = 12.14.0;
 			};
 		};
+		F1AE00052F9000000000A001 /* XCRemoteSwiftPackageReference "GoogleSignIn-iOS" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/google/GoogleSignIn-iOS";
+			requirement = {
+				kind = exactVersion;
+				version = 9.2.0;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -393,6 +552,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = F1AE00022F9000000000A001 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
 			productName = FirebaseAuth;
+		};
+		F1AE00062F9000000000A001 /* GoogleSignIn */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = F1AE00052F9000000000A001 /* XCRemoteSwiftPackageReference "GoogleSignIn-iOS" */;
+			productName = GoogleSignIn;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
