@@ -1,0 +1,34 @@
+# .swiftlint.yml
+
+# folders to check
+included:
+  - StuttererApp
+
+# folders to skip
+excluded:
+  - StuttererAppTests
+  - Pods
+
+# rules that are too strict for a student project, turned off rather
+# than fought against
+disabled_rules:
+  - trailing_whitespace
+  - todo
+
+# reasonable limits, tuned a bit looser than SwiftLint's defaults
+# since some of your views have long body closures
+line_length:
+  warning: 150
+  error: 200
+
+function_body_length:
+  warning: 60
+  error: 100
+
+type_body_length:
+  warning: 300
+  error: 400
+
+file_length:
+  warning: 400
+  error: 600

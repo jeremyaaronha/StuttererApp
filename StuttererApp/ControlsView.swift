@@ -7,6 +7,9 @@ struct ControlsView: View {
 
     @ObservedObject var audioManager: AudioManager
 
+    // shows "Saved" on the button for a moment after a tap
+    @State private var showSaved = false
+
     var body: some View {
 
         ZStack {
@@ -115,6 +118,27 @@ struct ControlsView: View {
                                     }
                                 )
                                 .tint(.purple)
+                            }
+
+
+                            Button {
+
+                                audioManager.saveSettings()
+                                showSaved = true
+
+                                Task {
+                                    try? await Task.sleep(for: .seconds(1.5))
+                                    showSaved = false
+                                }
+
+                            } label: {
+
+                                Text(showSaved ? "Saved" : "Save Settings")
+                                    .font(.headline)
+                                    .frame(maxWidth: .infinity)
+                                    .padding()
+                                    .background(Color.cyan.opacity(0.7))
+                                    .cornerRadius(20)
                             }
 
 
