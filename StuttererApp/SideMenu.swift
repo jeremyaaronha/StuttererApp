@@ -70,6 +70,7 @@ struct SideMenu: View {
                             } label: {
                                 menuRow(title: item.title, systemImage: item.systemImage)
                             }
+                            .buttonStyle(PressableButtonStyle())
                         }
                     }
                     .padding(.top, 12)
@@ -87,6 +88,7 @@ struct SideMenu: View {
                 } label: {
                     menuRow(title: "Sign Out", systemImage: "arrow.right.square", tint: .red)
                 }
+                .buttonStyle(PressableButtonStyle())
                 .padding(.bottom, 32)
             }
             .frame(width: 280)

@@ -161,3 +161,38 @@ struct HeadphoneRequirementBanner: View {
         .clipShape(RoundedRectangle(cornerRadius: 16, style: .continuous))
     }
 }
+
+// scales a tappable view down slightly while pressed for tactile feedback
+struct PressableButtonStyle: ButtonStyle {
+    var scale: CGFloat = 0.96
+
+    func makeBody(configuration: Configuration) -> some View {
+        configuration.label
+            .scaleEffect(configuration.isPressed ? scale : 1.0)
+            .opacity(configuration.isPressed ? 0.9 : 1.0)
+            .animation(.easeOut(duration: 0.15), value: configuration.isPressed)
+    }
+}
+
+// fades and slides a card up as it first appears, with an optional stagger delay
+struct AppearCard: ViewModifier {
+    var delay: Double = 0
+    @State private var shown = false
+
+    func body(content: Content) -> some View {
+        content
+            .opacity(shown ? 1 : 0)
+            .offset(y: shown ? 0 : 16)
+            .onAppear {
+                withAnimation(.easeOut(duration: 0.35).delay(delay)) {
+                    shown = true
+                }
+            }
+    }
+}
+
+extension View {
+    func appearCard(delay: Double = 0) -> some View {
+        modifier(AppearCard(delay: delay))
+    }
+}

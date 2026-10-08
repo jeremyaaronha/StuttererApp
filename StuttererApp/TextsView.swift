@@ -44,6 +44,7 @@ struct TextsView: View {
                             .buttonStyle(.borderedProminent)
                         }
                     }
+                    .appearCard()
 
                     VStack(alignment: .leading, spacing: 8) {
 
@@ -103,7 +104,7 @@ struct TextsView: View {
                                         }
                                     }
                                 }
-                                .buttonStyle(.plain)
+                                .buttonStyle(PressableButtonStyle())
                                 .contextMenu {
                                     Button(role: .destructive) {
                                         deleteText(item)

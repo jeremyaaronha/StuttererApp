@@ -36,6 +36,7 @@ struct ProfileView: View {
                             .foregroundColor(.secondary)
                     }
                     .padding(.top, 12)
+                    .appearCard()
 
                     GlassCard {
                         VStack(spacing: 0) {
@@ -75,6 +76,7 @@ struct ProfileView: View {
                             }
                         }
                     }
+                    .appearCard(delay: 0.08)
 
                     // signs out of firebase, which sends the app back to the login screen
                     Button {
@@ -89,10 +91,13 @@ struct ProfileView: View {
                             .foregroundColor(.red)
                             .clipShape(Capsule())
                     }
+                    .buttonStyle(PressableButtonStyle())
+                    .appearCard(delay: 0.16)
 
                     Text("StuttererApp v1.0")
                         .font(.caption2)
                         .foregroundColor(.secondary)
+                        .appearCard(delay: 0.2)
                 }
                 .padding(24)
             }
