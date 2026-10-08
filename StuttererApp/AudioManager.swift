@@ -166,6 +166,8 @@ final class AudioManager: ObservableObject {
                 .playAndRecord,
                 mode: .default,
                 options: [
+                    // .allowBluetoothHFP is the iOS 26 name; Xcode 16.2 only
+                    // knows .allowBluetooth, which still works on iOS 26
                     .allowBluetooth,
                     .allowBluetoothA2DP,
                     .defaultToSpeaker
