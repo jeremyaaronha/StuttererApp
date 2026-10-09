@@ -1,0 +1,30 @@
+{
+  "configurations" : [
+    {
+      "id" : "2A933D29-9231-4532-A8AB-B62E6A853983",
+      "name" : "Test Scheme Action",
+      "options" : {
+
+      }
+    }
+  ],
+  "defaultOptions" : {
+    "performanceAntipatternCheckerEnabled" : true,
+    "targetForVariableExpansion" : {
+      "containerPath" : "container:StuttererApp.xcodeproj",
+      "identifier" : "DB1758942F8DD32D008BC1CA",
+      "name" : "StuttererApp"
+    }
+  },
+  "testTargets" : [
+    {
+      "parallelizable" : true,
+      "target" : {
+        "containerPath" : "container:StuttererApp.xcodeproj",
+        "identifier" : "41C938E13071B9DF000FEDBA",
+        "name" : "StuttererAppTests"
+      }
+    }
+  ],
+  "version" : 1
+}

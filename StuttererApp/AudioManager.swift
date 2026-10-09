@@ -75,8 +75,6 @@ final class AudioManager: ObservableObject {
 
         isLoadingSettings = true
 
-        let defaults = UserDefaults.standard
-
 
         if defaults.object(forKey: delayTime1Key) != nil {
             delayTime1 = defaults.double(forKey: delayTime1Key)
@@ -111,8 +109,6 @@ final class AudioManager: ObservableObject {
             return
         }
 
-
-        let defaults = UserDefaults.standard
 
 
         defaults.set(
