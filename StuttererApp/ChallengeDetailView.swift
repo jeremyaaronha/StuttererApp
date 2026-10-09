@@ -237,7 +237,7 @@ struct HighlightedPromptText: View {
             }
 
             let piece = Text(word)
-                .foregroundColor(isTarget ? Theme.accent : .white)
+                .foregroundColor(isTarget ? Theme.accent : Theme.textPrimary)
                 .fontWeight(isTarget ? .bold : .regular)
 
             let separator = index == words.count - 1 ? Text("") : Text(" ")

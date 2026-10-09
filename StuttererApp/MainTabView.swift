@@ -62,6 +62,16 @@ struct MainTabView: View {
                     .zIndex(1)
             }
         }
+        .sheet(item: $appState.activeSheet) { sheet in
+            switch sheet {
+            case .settings:
+                SettingsView()
+            case .helpFAQ:
+                HelpFAQView()
+            case .aboutDAF:
+                AboutDAFView()
+            }
+        }
         .onAppear {
 
             // load saved audio settings for the current user

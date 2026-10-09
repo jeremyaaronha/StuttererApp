@@ -70,7 +70,7 @@ struct ChallengesView: View {
                 VStack(alignment: .leading, spacing: 4) {
                     Text(sound.name)
                         .font(.subheadline.weight(.semibold))
-                        .foregroundColor(.white)
+                        .foregroundColor(Theme.textPrimary)
                     Text("\(completed) of \(total) completed")
                         .font(.caption)
                         .foregroundColor(.secondary)

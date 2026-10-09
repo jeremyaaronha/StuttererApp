@@ -1,28 +1,56 @@
 import SwiftUI
+import UIKit
+
+// resolves to a different colour in light and dark appearance
+extension Color {
+    static func adaptive(light: Color, dark: Color) -> Color {
+        Color(UIColor { trait in
+            trait.userInterfaceStyle == .dark ? UIColor(dark) : UIColor(light)
+        })
+    }
+}
 
 enum Theme {
 
     // primary accent used for interactive elements and highlights
-    static let accent = Color.cyan
+    static let accent = Color.adaptive(
+        light: Color(red: 0.0, green: 0.52, blue: 0.70),
+        dark: .cyan
+    )
 
     // green used for the start action like the original
     static let start = Color.green
 
-    // soft dark background gradient used behind every screen
+    // main text colour that stays readable in both appearances
+    static let textPrimary = Color.adaptive(
+        light: Color(red: 0.08, green: 0.10, blue: 0.14),
+        dark: .white
+    )
+
+    // soft background gradient used behind every screen
     static let background = LinearGradient(
-        colors: [Color.black, Color.blue.opacity(0.6)],
+        colors: [
+            Color.adaptive(light: Color(red: 0.96, green: 0.98, blue: 1.0), dark: .black),
+            Color.adaptive(light: Color(red: 0.80, green: 0.89, blue: 0.98), dark: Color.blue.opacity(0.6))
+        ],
         startPoint: .top,
         endPoint: .bottom
     )
 
-    // subtle translucent dark gradient used to fill cards
+    // translucent gradient used to fill cards
     static let card = LinearGradient(
         colors: [
-            Color.white.opacity(0.10),
-            Color.white.opacity(0.04)
+            Color.adaptive(light: .white, dark: Color.white.opacity(0.10)),
+            Color.adaptive(light: Color.white.opacity(0.85), dark: Color.white.opacity(0.04))
         ],
         startPoint: .topLeading,
         endPoint: .bottomTrailing
+    )
+
+    // subtle border drawn around cards and pills
+    static let cardBorder = Color.adaptive(
+        light: Color.black.opacity(0.08),
+        dark: Color.white.opacity(0.12)
     )
 
     // gradient used for primary buttons and highlights
@@ -49,7 +77,7 @@ struct GlassCard<Content: View>: View {
             .clipShape(RoundedRectangle(cornerRadius: 24, style: .continuous))
             .overlay(
                 RoundedRectangle(cornerRadius: 24, style: .continuous)
-                    .strokeBorder(Color.white.opacity(0.12), lineWidth: 1)
+                    .strokeBorder(Theme.cardBorder, lineWidth: 1)
             )
             .shadow(color: Color.black.opacity(0.25), radius: 12, x: 0, y: 6)
     }
@@ -73,6 +101,7 @@ struct ScreenHeader: View {
                     .foregroundColor(.secondary)
             }
             Spacer()
+            ThemePill()
             Button {
                 withAnimation(.easeInOut(duration: 0.25)) {
                     appState.isMenuOpen = true
@@ -80,13 +109,41 @@ struct ScreenHeader: View {
             } label: {
                 Image(systemName: "line.3.horizontal")
                     .font(.title2.weight(.semibold))
-                    .foregroundColor(.white)
+                    .foregroundColor(Theme.textPrimary)
                     .frame(width: 44, height: 44)
                     .background(Theme.card)
                     .clipShape(RoundedRectangle(cornerRadius: 12, style: .continuous))
             }
             .accessibilityLabel("Open menu")
         }
+    }
+}
+
+// a pill button that switches the app between light and dark appearance
+struct ThemePill: View {
+    @AppStorage("isDarkMode") private var isDarkMode = true
+
+    var body: some View {
+        Button {
+            withAnimation(.easeInOut(duration: 0.25)) {
+                isDarkMode.toggle()
+            }
+        } label: {
+            HStack(spacing: 6) {
+                Image(systemName: isDarkMode ? "moon.fill" : "sun.max.fill")
+                Text(isDarkMode ? "Dark" : "Light")
+                    .font(.caption.weight(.semibold))
+            }
+            .foregroundColor(Theme.accent)
+            .padding(.horizontal, 12)
+            .frame(height: 44)
+            .background(Theme.card)
+            .clipShape(Capsule())
+            .overlay(
+                Capsule().strokeBorder(Theme.cardBorder, lineWidth: 1)
+            )
+        }
+        .accessibilityLabel(isDarkMode ? "Switch to light mode" : "Switch to dark mode")
     }
 }
 
@@ -108,7 +165,7 @@ struct StatusPill: View {
         .background(Theme.card)
         .clipShape(Capsule())
         .overlay(
-            Capsule().strokeBorder(Color.white.opacity(0.12), lineWidth: 1)
+            Capsule().strokeBorder(Theme.cardBorder, lineWidth: 1)
         )
     }
 }

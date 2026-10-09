@@ -5,6 +5,7 @@ struct ContentView: View {
     @EnvironmentObject private var appState: AppState
     @EnvironmentObject private var auth: AuthManager
 
+    @AppStorage("isDarkMode") private var isDarkMode = true
     @State private var showSplash = true
 
     var body: some View {
@@ -23,7 +24,7 @@ struct ContentView: View {
                     .zIndex(1)
             }
         }
-        .preferredColorScheme(.dark)
+        .preferredColorScheme(isDarkMode ? .dark : .light)
         .onAppear {
 
             DispatchQueue.main.asyncAfter(

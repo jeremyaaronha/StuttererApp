@@ -17,6 +17,9 @@ final class AppState: ObservableObject {
     // whether the slide in side menu is open
     @Published var isMenuOpen: Bool = false
 
+    // a sheet presented globally, used by the side menu to open Settings etc.
+    @Published var activeSheet: AppSheet?
+
     // whether the user has passed the welcome login screen
     @Published var isSignedIn: Bool
 
@@ -53,4 +56,13 @@ enum MainTab: Hashable {
     case texts
     case challenges
     case profile
+}
+
+// sheets that can be presented from anywhere, such as the side menu
+enum AppSheet: String, Identifiable {
+    case settings
+    case helpFAQ
+    case aboutDAF
+
+    var id: String { rawValue }
 }

@@ -13,7 +13,6 @@ struct SideMenu: View {
         ("Delay Tuning Engine", "slider.horizontal.3", .controls),
         ("My Reading Library", "text.book.closed", .texts),
         ("Speech Sound Challenges", "quote.bubble", .challenges),
-        ("Therapist Reports", "chart.line.uptrend.xyaxis", nil),
         ("Settings", "gearshape", nil),
         ("Help & FAQ", "questionmark.circle", nil),
         ("About DAF Technique", "book", nil)
@@ -62,9 +61,20 @@ struct SideMenu: View {
                     VStack(spacing: 4) {
                         ForEach(items, id: \.title) { item in
                             Button {
-                                // navigate if the item has a tab otherwise just close
+                                // navigate to a tab, open a sheet, or just close
                                 if let tab = item.tab {
                                     appState.selectedTab = tab
+                                } else {
+                                    switch item.title {
+                                    case "Settings":
+                                        appState.activeSheet = .settings
+                                    case "Help & FAQ":
+                                        appState.activeSheet = .helpFAQ
+                                    case "About DAF Technique":
+                                        appState.activeSheet = .aboutDAF
+                                    default:
+                                        break
+                                    }
                                 }
                                 close()
                             } label: {
