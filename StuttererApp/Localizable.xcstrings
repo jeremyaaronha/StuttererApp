@@ -127,6 +127,37 @@
     "Already have an account? Sign in" : {
 
     },
+    "App Language" : {
+      "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Idioma de la aplicación"
+          }
+        }
+      }
+    },
+    "Appearance" : {
+      "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Apariencia"
+          }
+        }
+      }
+    },
+    "APPEARANCE" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "APARIENCIA"
+          }
+        }
+      }
+    },
     "Are you sure you want to delete this text?" : {
       "localizations" : {
         "es" : {
@@ -206,6 +237,17 @@
         }
       }
     },
+    "Choose a light or dark look for the app." : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Elige el modo claro u oscuro de la aplicación."
+          }
+        }
+      }
+    },
     "Choose a Sound" : {
       "localizations" : {
         "es" : {
@@ -261,6 +303,16 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Crea y guarda textos para utilizarlos durante tus sesiones de práctica."
+          }
+        }
+      }
+    },
+    "Dark" : {
+      "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Oscuro"
           }
         }
       }
@@ -613,12 +665,21 @@
     "Key 2" : {
       "extractionState" : "manual"
     },
+    "Key 3" : {
+      "extractionState" : "manual"
+    },
+    "Key 5" : {
+      "extractionState" : "manual"
+    },
+    "Key 6" : {
+      "extractionState" : "manual"
+    },
     "Language" : {
       "extractionState" : "manual",
       "localizations" : {
         "es" : {
           "stringUnit" : {
-            "state" : "translated",
+            "state" : "needs_review",
             "value" : "Idioma"
           }
         }
@@ -636,6 +697,16 @@
     },
     "Leverage two delayed feedback voices in real-time to ease speech blocks and build vocal confidence." : {
 
+    },
+    "Light" : {
+      "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Claro"
+          }
+        }
+      }
     },
     "Light Contacts" : {
       "extractionState" : "manual",
