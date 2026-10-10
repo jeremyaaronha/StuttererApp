@@ -63,10 +63,15 @@ struct SideMenu: View {
                         ForEach(items, id: \.title) { item in
                             Button {
                                 // navigate if the item has a tab otherwise just close
-                                if let tab = item.tab {
-                                    appState.selectedTab = tab
+                                if item.title == "Settings" {
+                                    close()
+                                    appState.isSettingsOpen = true
+                                } else {
+                                    if let tab = item.tab {
+                                        appState.selectedTab = tab
+                                    }
+                                    close()
                                 }
-                                close()
                             } label: {
                                 menuRow(title: item.title, systemImage: item.systemImage)
                             }
@@ -112,7 +117,7 @@ struct SideMenu: View {
                 .font(.body)
                 .foregroundColor(tint == .white ? Theme.accent : tint)
                 .frame(width: 24)
-            Text(title)
+            Text(LocalizedStringKey(title))
                 .font(.body)
                 .foregroundColor(tint)
             Spacer()

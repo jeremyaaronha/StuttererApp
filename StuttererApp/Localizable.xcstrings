@@ -1,0 +1,1561 @@
+{
+  "sourceLanguage" : "en",
+  "strings" : {
+    "" : {
+
+    },
+    " " : {
+
+    },
+    "#%lld" : {
+
+    },
+    "%@ %@" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "%1$@ %2$@"
+          }
+        }
+      }
+    },
+    "%@ Challenge" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Desafío de %@"
+          }
+        }
+      }
+    },
+    "%lld of %lld challenges mastered" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "%1$lld of %2$lld challenges mastered"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%1$lld de %2$lld desafíos completados"
+          }
+        }
+      }
+    },
+    "%lld of %lld completed" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "%1$lld of %2$lld completed"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%1$lld de %2$lld completados"
+          }
+        }
+      }
+    },
+    "•" : {
+
+    },
+    "75ms / 150ms" : {
+
+    },
+    "A Practice Tool, Not a Cure" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Una herramienta de práctica, no una cura"
+          }
+        }
+      }
+    },
+    "About DAF" : {
+      "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Acerca de DAF"
+          }
+        }
+      }
+    },
+    "About DAF Technique" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Acerca de la técnica DAF"
+          }
+        }
+      }
+    },
+    "ACTIVE DELAY SETTINGS" : {
+      "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "CONFIGURACIÓN ACTUAL DEL RETRASO"
+          }
+        }
+      }
+    },
+    "Add Photo" : {
+      "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Agregar foto"
+          }
+        }
+      }
+    },
+    "Alqhazo, M., & Alkhamaiseh, Z. (2025). Effect of delayed auditory feedback on stuttering-like disfluencies. International Journal of Language & Communication Disorders, 60(2), e70007." : {
+
+    },
+    "Already have an account? Sign in" : {
+
+    },
+    "Are you sure you want to delete this text?" : {
+      "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "¿Estás seguro de que deseas eliminar este texto?"
+          }
+        }
+      }
+    },
+    "At least %lld characters, with a letter and a number." : {
+
+    },
+    "Audience Simulation" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Simulación de público"
+          }
+        }
+      }
+    },
+    "Back" : {
+
+    },
+    "Cancel" : {
+      "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Cancelar"
+          }
+        }
+      }
+    },
+    "Challenge mastered" : {
+      "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Desafío completado"
+          }
+        }
+      }
+    },
+    "CHALLENGE SOUNDS" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "SONIDOS DE PRÁCTICA"
+          }
+        }
+      }
+    },
+    "Challenges" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Desafíos"
+          }
+        }
+      }
+    },
+    "Change Photo" : {
+      "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Cambiar foto"
+          }
+        }
+      }
+    },
+    "Choose a Sound" : {
+      "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Elige un sonido"
+          }
+        }
+      }
+    },
+    "Choose the language you want to use in the app." : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Elige el idioma que deseas utilizar en la aplicación."
+          }
+        }
+      }
+    },
+    "Choral Speech" : {
+
+    },
+    "Close menu" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Cerrar menú"
+          }
+        }
+      }
+    },
+    "Controls" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Controles"
+          }
+        }
+      }
+    },
+    "Create Account" : {
+
+    },
+    "Create and save texts to use during your practice sessions." : {
+      "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Crea y guarda textos para utilizarlos durante tus sesiones de práctica."
+          }
+        }
+      }
+    },
+    "Default Pitch & Shift" : {
+      "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Tono y ajuste predeterminados"
+          }
+        }
+      }
+    },
+    "Delay Tuning Engine" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Configuración del retardo"
+          }
+        }
+      }
+    },
+    "Delayed Auditory Feedback (DAF) plays your own voice back to you through headphones with a tiny delay — usually a fraction of a second. Hearing yourself slightly later changes how you monitor your speech and often encourages a slower, smoother pace." : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "La retroalimentación auditiva retardada (DAF) reproduce tu propia voz a través de audífonos con un pequeño retraso, generalmente de una fracción de segundo. Escucharte con un ligero retardo cambia la forma en que percibes tu habla y, en muchos casos, favorece un ritmo más lento y fluido."
+          }
+        }
+      }
+    },
+    "Delete" : {
+      "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Eliminar"
+          }
+        }
+      }
+    },
+    "Delete Text" : {
+      "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Eliminar texto"
+          }
+        }
+      }
+    },
+    "Do I need headphones?" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "¿Necesito audífonos?"
+          }
+        }
+      }
+    },
+    "Don't have an account? Sign up" : {
+
+    },
+    "Done" : {
+      "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Listo"
+          }
+        }
+      }
+    },
+    "Easy" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Fácil"
+          }
+        }
+      }
+    },
+    "Easy Onset" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Inicio suave"
+          }
+        }
+      }
+    },
+    "Edit Profile" : {
+      "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Editar perfil"
+          }
+        }
+      }
+    },
+    "Edit Text" : {
+      "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Editar texto"
+          }
+        }
+      }
+    },
+    "Email" : {
+      "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Correo electrónico"
+          }
+        }
+      }
+    },
+    "Enable microphone and speech recognition in Settings to use recording." : {
+      "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Activa el micrófono y el reconocimiento de voz en Configuración para utilizar la grabación."
+          }
+        }
+      }
+    },
+    "English" : {
+
+    },
+    "Español" : {
+
+    },
+    "Firebase isn't set up yet. Add GoogleService-Info.plist to the project." : {
+
+    },
+    "First name" : {
+      "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Nombre"
+          }
+        }
+      }
+    },
+    "FLUENCY CHALLENGE" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "DESAFÍO DE FLUIDEZ"
+          }
+        }
+      }
+    },
+    "FLUENCY SENTENCE" : {
+      "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "FRASE DE PRÁCTICA"
+          }
+        }
+      }
+    },
+    "FLUENCY TIPS" : {
+      "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "CONSEJOS PARA LA FLUIDEZ"
+          }
+        }
+      }
+    },
+    "FLUENCY-BUILDING EXERCISE" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "EJERCICIO PARA MEJORAR LA FLUIDEZ"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "EJERCICIO PARA MEJORAR LA FLUIDEZ"
+          }
+        }
+      }
+    },
+    "FLUENCY-BUILDING EXERCISES" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "EJERCICIOS PARA MEJORAR LA FLUIDEZ"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "EJERCICIOS PARA MEJORAR LA FLUIDEZ"
+          }
+        }
+      }
+    },
+    "Forgot password?" : {
+
+    },
+    "Forgot Password?" : {
+
+    },
+    "Great work!" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "¡Buen trabajo!"
+          }
+        }
+      }
+    },
+    "Hard" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Difícil"
+          }
+        }
+      }
+    },
+    "Headphones are required to hear the delayed audio feedback." : {
+      "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Se necesitan audífonos para escuchar la retroalimentación de audio con retraso."
+          }
+        }
+      }
+    },
+    "Headphones On" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Audífonos conectados"
+          }
+        }
+      }
+    },
+    "Heard: \"%@\"" : {
+      "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Escuchado: «%@»"
+          }
+        }
+      }
+    },
+    "Heard: “%@”" : {
+      "extractionState" : "manual"
+    },
+    "Help & FAQ" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ayuda y preguntas frecuentes"
+          }
+        }
+      }
+    },
+    "How do I start a practice session?" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "¿Cómo inicio una sesión de práctica?"
+          }
+        }
+      }
+    },
+    "How It May Support Fluency" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Cómo puede ayudar a mejorar la fluidez"
+          }
+        }
+      }
+    },
+    "Intermediate" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Intermedio"
+          }
+        }
+      }
+    },
+    "Keep practicing" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Sigue practicando"
+          }
+        }
+      }
+    },
+    "Key" : {
+      "extractionState" : "manual"
+    },
+    "Key 1" : {
+      "extractionState" : "manual"
+    },
+    "Key 2" : {
+      "extractionState" : "manual"
+    },
+    "Language" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Idioma"
+          }
+        }
+      }
+    },
+    "Last name" : {
+      "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Apellido"
+          }
+        }
+      }
+    },
+    "Leverage two delayed feedback voices in real-time to ease speech blocks and build vocal confidence." : {
+
+    },
+    "Light Contacts" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Contactos suaves"
+          }
+        }
+      }
+    },
+    "Many people who stutter become noticeably more fluent when they speak at the same time as another voice. This is called choral speech, or the “choral voice” effect. DAF recreates a similar altered-hearing condition on your own: by feeding your voice back with a delay, the app mimics the supportive feeling of speaking alongside someone else." : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Muchas personas que tartamudean experimentan una mayor fluidez cuando hablan al mismo tiempo que otra persona. Esto se conoce como habla coral o efecto de voz coral. DAF recrea una condición auditiva alterada similar: al reproducir tu voz con un pequeño retraso, la aplicación busca imitar la sensación de acompañamiento que se produce al hablar junto a otra persona."
+          }
+        }
+      }
+    },
+    "MENU" : {
+
+    },
+    "Mic Connected" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Micrófono conectado"
+          }
+        }
+      }
+    },
+    "Mic Off" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Micrófono apagado"
+          }
+        }
+      }
+    },
+    "My Reading Library" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Mi biblioteca de lectura"
+          }
+        }
+      }
+    },
+    "My Saved Practice Texts" : {
+      "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Mis textos de práctica guardados"
+          }
+        }
+      }
+    },
+    "Name" : {
+      "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Nombre"
+          }
+        }
+      }
+    },
+    "New Practice Text" : {
+      "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Nuevo texto de práctica"
+          }
+        }
+      }
+    },
+    "No email" : {
+      "extractionState" : "manual"
+    },
+    "No Headphones" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Sin audífonos"
+          }
+        }
+      }
+    },
+    "No saved texts yet" : {
+      "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Aún no hay textos guardados"
+          }
+        }
+      }
+    },
+    "Noticed %lld repeated words — try an easy, smooth restart next time." : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Se detectaron %lld palabras repetidas. Intenta comenzar nuevamente con calma y suavidad."
+          }
+        }
+      }
+    },
+    "Open menu" : {
+      "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Abrir menú"
+          }
+        }
+      }
+    },
+    "Open the Practice tab and click 'Start session'. You can adjust your voice settings from the Controls tab." : {
+      "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Abre la pestaña Práctica y presiona «Iniciar sesión». Puedes ajustar la configuración de voz desde la pestaña Controles."
+          }
+        }
+      }
+    },
+    "Open the Practice tab and click ‘Start session’. You can adjust your voice settings from the Controls tab." : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Abre la pestaña Práctica y presiona «Iniciar sesión». Puedes ajustar la configuración de voz desde la pestaña Controles."
+          }
+        }
+      }
+    },
+    "Password" : {
+
+    },
+    "Pausing & Phrasing" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Pausas y frases"
+          }
+        }
+      }
+    },
+    "Phone Call Practice" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Práctica de llamada telefónica"
+          }
+        }
+      }
+    },
+    "Play" : {
+      "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Reproducir"
+          }
+        }
+      }
+    },
+    "Practice" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Práctica"
+          }
+        }
+      }
+    },
+    "Practice Board" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Panel de práctica"
+          }
+        }
+      }
+    },
+    "PRACTICE HOME" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "INICIO DE PRÁCTICA"
+          }
+        }
+      }
+    },
+    "Practice Text" : {
+      "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Texto de práctica"
+          }
+        }
+      }
+    },
+    "Practice text title" : {
+      "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Título del texto de práctica"
+          }
+        }
+      }
+    },
+    "Profile" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Perfil"
+          }
+        }
+      }
+    },
+    "Prolonged Speech" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Habla prolongada"
+          }
+        }
+      }
+    },
+    "Put on both headphones. Speak naturally. Your voice will be accompanied by two delayed feedback signals." : {
+      "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ponte ambos audífonos y habla con naturalidad. Escucharás tu voz acompañada de dos señales de audio con retraso."
+          }
+        }
+      }
+    },
+    "Reading Language" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Idioma de lectura"
+          }
+        }
+      }
+    },
+    "Reading practice text" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Leyendo texto de práctica"
+          }
+        }
+      }
+    },
+    "READY TO ASSIST" : {
+      "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "LISTO PARA AYUDAR"
+          }
+        }
+      }
+    },
+    "Ready to read" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Listo para leer"
+          }
+        }
+      }
+    },
+    "Reference" : {
+      "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Referencia"
+          }
+        }
+      }
+    },
+    "Remove Photo" : {
+      "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Eliminar foto"
+          }
+        }
+      }
+    },
+    "Research has reported that DAF can reduce stuttering for many speakers, sometimes with large immediate improvements in fluency and without making speech sound unnatural. Results vary from person to person, and some studies have found only a limited effect during spontaneous conversation. DAF works best as regular practice over time rather than a one-time fix." : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Diversas investigaciones han señalado que DAF puede reducir la tartamudez en muchas personas y, en algunos casos, producir mejoras inmediatas importantes en la fluidez sin que el habla suene poco natural. Los resultados varían de una persona a otra, y algunos estudios han encontrado efectos limitados durante las conversaciones espontáneas. DAF debe considerarse una herramienta de práctica regular y no una solución inmediata."
+          }
+        }
+      }
+    },
+    "Reset" : {
+      "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Restablecer"
+          }
+        }
+      }
+    },
+    "Save" : {
+      "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Guardar"
+          }
+        }
+      }
+    },
+    "Save Settings" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Guardar configuración"
+          }
+        }
+      }
+    },
+    "Save Text" : {
+      "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Guardar Texto"
+          }
+        }
+      }
+    },
+    "Saved" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Guardado"
+          }
+        }
+      }
+    },
+    "Saving..." : {
+      "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Guardando…"
+          }
+        }
+      }
+    },
+    "Select a target sound below to start specialised fluency-building speech loops." : {
+      "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Selecciona uno de los siguientes sonidos para comenzar ejercicios de habla diseñados para mejorar la fluidez."
+          }
+        }
+      }
+    },
+    "Settings" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Configuración"
+          }
+        }
+      }
+    },
+    "Sign In" : {
+      "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Iniciar Sesión"
+          }
+        }
+      }
+    },
+    "Sign In to Your Account" : {
+      "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Inicia sesión con tu cuenta"
+          }
+        }
+      }
+    },
+    "Sign Out" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Cerrar sesión"
+          }
+        }
+      }
+    },
+    "Sign Up" : {
+
+    },
+    "Something went wrong. Please try again." : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ocurrió un problema. Inténtalo nuevamente."
+          }
+        }
+      }
+    },
+    "Sound Progress" : {
+      "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Progreso del sonido"
+          }
+        }
+      }
+    },
+    "Speak the sentence aloud using gentle %@ placement." : {
+      "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Lee la frase en voz alta articulando suavemente el sonido %@."
+          }
+        }
+      }
+    },
+    "SPEECH ASSIST" : {
+
+    },
+    "Speech Reader Input" : {
+      "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Lector de textos"
+          }
+        }
+      }
+    },
+    "Speech Sound Challenges" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Desafíos de pronunciación"
+          }
+        }
+      }
+    },
+    "Spontaneous Monologue" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Monólogo espontáneo"
+          }
+        }
+      }
+    },
+    "Start" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Iniciar"
+          }
+        }
+      }
+    },
+    "Start Recording" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Iniciar grabación"
+          }
+        }
+      }
+    },
+    "Start Session" : {
+      "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Iniciar sesión de práctica"
+          }
+        }
+      }
+    },
+    "Start Your Session" : {
+      "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Comienza tu sesión"
+          }
+        }
+      }
+    },
+    "Stop" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Detener"
+          }
+        }
+      }
+    },
+    "Stop Recording" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Detener grabación"
+          }
+        }
+      }
+    },
+    "StuttererApp" : {
+
+    },
+    "StuttererApp Account" : {
+      "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Cuenta de StuttererApp"
+          }
+        }
+      }
+    },
+    "StuttererApp is a self-guided practice tool. It is not a medical treatment and does not cure stuttering. Everyone responds differently, so for personalized support we encourage working with a licensed speech-language pathologist." : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "StuttererApp es una herramienta de práctica autónoma. No es un tratamiento médico ni cura la tartamudez. Cada persona responde de manera diferente, por lo que recomendamos buscar el apoyo de un fonoaudiólogo para recibir orientación personalizada."
+          }
+        }
+      }
+    },
+    "StuttererApp v1.0" : {
+
+    },
+    "Text to Speech" : {
+      "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Texto a Voz"
+          }
+        }
+      }
+    },
+    "Texts" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Textos"
+          }
+        }
+      }
+    },
+    "TEXTS LIBRARY" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "BIBLIOTECA DE TEXTOS"
+          }
+        }
+      }
+    },
+    "The Choral Voice Effect" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "El efecto de voz coral"
+          }
+        }
+      }
+    },
+    "The Controls tab lets you adjust the delay of both voices, the voice effect, and the volume of the second voice." : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "La pestaña Controles te permite ajustar el retardo de ambas voces, el efecto de voz y el volumen de la segunda voz."
+          }
+        }
+      }
+    },
+    "The microphone is used to hear your voice and return the delayed audio while you practice." : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "El micrófono se utiliza para captar tu voz y reproducir el audio con retardo mientras practicas."
+          }
+        }
+      }
+    },
+    "Therapist Reports" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Informes del terapeuta"
+          }
+        }
+      }
+    },
+    "This app generates supportive acoustic environments based on delayed auditory feedback (DAF). It is not a diagnostic medical treatment." : {
+
+    },
+    "Title" : {
+
+    },
+    "Very Hard" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Muy difícil"
+          }
+        }
+      }
+    },
+    "View study" : {
+      "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ver estudio"
+          }
+        }
+      }
+    },
+    "VOCAL TUNING" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "AJUSTE DE VOZ"
+          }
+        }
+      }
+    },
+    "Voice" : {
+      "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Voz"
+          }
+        }
+      }
+    },
+    "Voice 1 Delay" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Retraso de voz 1"
+          }
+        }
+      }
+    },
+    "Voice 2 Delay" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Retraso de voz 2"
+          }
+        }
+      }
+    },
+    "Voice 2 Volume" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Volumen de voz 2"
+          }
+        }
+      }
+    },
+    "Voice Effect" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Efecto de voz"
+          }
+        }
+      }
+    },
+    "Voluntary Stuttering" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Tartamudeo voluntario"
+          }
+        }
+      }
+    },
+    "What are saved practice texts?" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "¿Qué son los textos de práctica guardados?"
+          }
+        }
+      }
+    },
+    "What are the Controls?" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "¿Qué son los controles?"
+          }
+        }
+      }
+    },
+    "What is DAF?" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "¿Qué es DAF?"
+          }
+        }
+      }
+    },
+    "What is my account used for?" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "¿Para qué sirve mi cuenta?"
+          }
+        }
+      }
+    },
+    "Why does the app need microphone access?" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "¿Por qué la aplicación necesita acceso al micrófono?"
+          }
+        }
+      }
+    },
+    "words" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "palabras"
+          }
+        }
+      }
+    },
+    "Yes. Headphones are required to hear the delayed voice feedback correctly and avoid audio feedback from the speaker. You can use wired or Bluetooth headphones." : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Sí. Necesitas audífonos para escuchar correctamente tu voz con retardo y evitar la retroalimentación del altavoz. Puedes utilizar audífonos con cable o Bluetooth."
+          }
+        }
+      }
+    },
+    "You can create and save texts in the Texts tab. Your texts are saved to your account so you can use them again later." : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Puedes crear y guardar textos en la pestaña Textos. Los textos se guardan en tu cuenta para que puedas utilizarlos nuevamente."
+          }
+        }
+      }
+    },
+    "You hit %lld of %lld target %@ words." : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "You hit %1$lld of %2$lld target %3$@ words."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Pronunciaste %lld de %lld palabras que contienen el sonido %@."
+          }
+        }
+      }
+    },
+    "you@email.com" : {
+
+    },
+    "Your account keeps your personal information, saved practice texts, and preferences connected to your user." : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Tu cuenta mantiene asociados a tu usuario tus datos personales, los textos de práctica guardados y tus preferencias."
+          }
+        }
+      }
+    }
+  },
+  "version" : "1.2"
+}

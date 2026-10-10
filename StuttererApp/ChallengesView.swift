@@ -1,11 +1,21 @@
 import SwiftUI
 
 // speech sound challenges tab
-// lists every target sound and routes into its challenge grid
+// shows challenges based on the selected language
 struct ChallengesView: View {
 
     @EnvironmentObject private var auth: AuthManager
+    @AppStorage("appLanguage") private var appLanguage = "en"
     @StateObject private var progress = ChallengeProgressStore()
+
+    // sounds available for the selected language
+    private var availableSounds: [SpeechSound] {
+        if appLanguage == "es" {
+            return SpeechCatalog.spanishSounds
+        }
+
+        return SpeechCatalog.sounds
+    }
 
     var body: some View {
         NavigationStack {
@@ -22,8 +32,10 @@ struct ChallengesView: View {
 
                         GlassCard {
                             VStack(alignment: .leading, spacing: 8) {
+
                                 Text("Choose a Sound")
                                     .font(.headline)
+
                                 Text("Select a target sound below to start specialised fluency-building speech loops.")
                                     .font(.subheadline)
                                     .foregroundColor(.secondary)
@@ -31,7 +43,7 @@ struct ChallengesView: View {
                         }
                         .appearCard()
 
-                        ForEach(SpeechCatalog.sounds) { sound in
+                        ForEach(availableSounds) { sound in
                             NavigationLink {
                                 ChallengeGridView(sound: sound)
                                     .environmentObject(progress)
@@ -65,12 +77,19 @@ struct ChallengesView: View {
                     .foregroundColor(Theme.accent)
                     .frame(width: 48, height: 48)
                     .background(Theme.accent.opacity(0.15))
-                    .clipShape(RoundedRectangle(cornerRadius: 12, style: .continuous))
+                    .clipShape(
+                        RoundedRectangle(
+                            cornerRadius: 12,
+                            style: .continuous
+                        )
+                    )
 
                 VStack(alignment: .leading, spacing: 4) {
-                    Text(sound.name)
+
+                    Text(LocalizedStringKey(sound.name))
                         .font(.subheadline.weight(.semibold))
                         .foregroundColor(.white)
+
                     Text("\(completed) of \(total) completed")
                         .font(.caption)
                         .foregroundColor(.secondary)

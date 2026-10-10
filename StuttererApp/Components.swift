@@ -66,9 +66,10 @@ struct ScreenHeader: View {
     var body: some View {
         HStack(alignment: .center) {
             VStack(alignment: .leading, spacing: 2) {
-                Text(title)
+                Text(LocalizedStringKey(title))
                     .font(.title2.weight(.bold))
-                Text(subtitle)
+
+                Text(LocalizedStringKey(subtitle))
                     .font(.caption.weight(.semibold))
                     .foregroundColor(.secondary)
             }
@@ -99,8 +100,7 @@ struct StatusPill: View {
     var body: some View {
         HStack(spacing: 6) {
             Image(systemName: systemImage)
-            Text(title)
-                .font(.subheadline.weight(.medium))
+            Text(LocalizedStringKey(title))                .font(.subheadline.weight(.medium))
         }
         .foregroundColor(isActive ? Theme.accent : .secondary)
         .padding(.horizontal, 12)
