@@ -125,7 +125,14 @@
 
     },
     "Already have an account? Sign in" : {
-
+      "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ya tienes una cuenta? Inicia sesión"
+          }
+        }
+      }
     },
     "App Language" : {
       "localizations" : {
@@ -183,7 +190,14 @@
       }
     },
     "Back" : {
-
+      "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Atrás"
+          }
+        }
+      }
     },
     "Cancel" : {
       "localizations" : {
@@ -270,7 +284,14 @@
       }
     },
     "Choral Speech" : {
-
+      "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Efecto Coral"
+          }
+        }
+      }
     },
     "Close menu" : {
       "extractionState" : "manual",
@@ -295,7 +316,14 @@
       }
     },
     "Create Account" : {
-
+      "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Crear cuenta"
+          }
+        }
+      }
     },
     "Create and save texts to use during your practice sessions." : {
       "localizations" : {
@@ -456,10 +484,24 @@
       }
     },
     "English" : {
-
+      "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Inglés"
+          }
+        }
+      }
     },
     "Español" : {
-
+      "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Spanish"
+          }
+        }
+      }
     },
     "Firebase isn't set up yet. Add GoogleService-Info.plist to the project." : {
 
@@ -533,7 +575,7 @@
         },
         "es" : {
           "stringUnit" : {
-            "state" : "translated",
+            "state" : "needs_review",
             "value" : "EJERCICIOS PARA MEJORAR LA FLUIDEZ"
           }
         }
