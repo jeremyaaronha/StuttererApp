@@ -5,6 +5,7 @@ import AVFoundation
 struct TextsView: View {
 
     @EnvironmentObject private var auth: AuthManager
+    @Environment(\.locale) private var locale
     @StateObject private var store = PracticeTextStore()
 
     @State private var showingNewText = false
@@ -156,7 +157,12 @@ struct TextsView: View {
             .split { $0.isWhitespace }
             .count
 
-        return "\(words) words"
+        let wordLabel = String(
+            localized: "words",
+            locale: locale
+        )
+
+        return "\(words) \(wordLabel)"
     }
 
     // deletes a practice text
@@ -193,6 +199,7 @@ struct PracticeTextDetailView: View {
 
     @Environment(\.dismiss) private var dismiss
     @EnvironmentObject private var auth: AuthManager
+    
 
     @ObservedObject var store: PracticeTextStore
 
@@ -278,9 +285,11 @@ struct PracticeTextDetailView: View {
                                     .font(.headline)
 
                                 Text(
-                                    isReading
-                                    ? "Reading practice text"
-                                    : "Ready to read"
+                                    LocalizedStringKey(
+                                        isReading
+                                        ? "Reading practice text"
+                                        : "Ready to read"
+                                    )
                                 )
                                 .font(.caption)
                                 .foregroundColor(.secondary)

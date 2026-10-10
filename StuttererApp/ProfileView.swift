@@ -62,7 +62,7 @@ struct ProfileView: View {
                                             .foregroundColor(Theme.accent)
                                             .frame(width: 24)
 
-                                        Text(item.title)
+                                        Text(LocalizedStringKey(item.title))
                                             .font(.subheadline)
 
                                         Spacer()
@@ -133,7 +133,7 @@ struct ProfileView: View {
             Text(profile.fullName ?? appState.userName)
                 .font(.title3.weight(.bold))
 
-            Text(auth.userEmail ?? "StuttererApp Account")
+            Text(auth.userEmail ?? String(localized: "StuttererApp Account"))
                 .font(.caption)
                 .foregroundColor(.secondary)
 
@@ -175,9 +175,7 @@ struct HelpFAQView: View {
 
                         faqItem(
                             question: "Do I need headphones?",
-                            answer: "Yes. Headphones are required to hear the delayed voice feedback "
-                                + "correctly and avoid audio feedback from the speaker. You can use wired "
-                                + "or Bluetooth headphones."
+                            answer: "Yes. Headphones are required to hear the delayed voice feedback correctly and avoid audio feedback from the speaker. You can use wired or Bluetooth headphones."
                         )
 
                         faqItem(
@@ -187,8 +185,7 @@ struct HelpFAQView: View {
 
                         faqItem(
                             question: "What are saved practice texts?",
-                            answer: "You can create and save texts in the Texts tab. Your texts are "
-                                + "saved to your account so you can use them again later."
+                            answer: "You can create and save texts in the Texts tab. Your texts are saved to your account so you can use them again later."
                         )
 
                         faqItem(
@@ -213,8 +210,8 @@ struct HelpFAQView: View {
 
     // shows one question and answer
     private func faqItem(
-        question: String,
-        answer: String
+        question: LocalizedStringKey,
+        answer: LocalizedStringKey
     ) -> some View {
 
         GlassCard {

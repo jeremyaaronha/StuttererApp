@@ -1,7 +1,6 @@
 import SwiftUI
 
 // difficulty tier for a speech sound challenge
-// controls the pill label and colour shown in the grid and detail screens
 enum ChallengeDifficulty: String, Codable, CaseIterable {
     case easy
     case intermediate
@@ -29,8 +28,7 @@ enum ChallengeDifficulty: String, Codable, CaseIterable {
     }
 }
 
-// a single speech technique slot shared across every sound
-// the practice text changes per sound but the technique guidance stays the same
+// a single speech technique
 struct ChallengeTechnique {
     let title: String
     let difficulty: ChallengeDifficulty
@@ -38,7 +36,7 @@ struct ChallengeTechnique {
     let tip: String
 }
 
-// one challenge for a specific sound built from a technique plus a practice prompt
+// one challenge for a specific sound
 struct SpeechChallenge: Identifiable {
     let id: String
     let index: Int
@@ -50,12 +48,11 @@ struct SpeechChallenge: Identifiable {
     let placementTip: String
     let patterns: [String]
 
-    // words in the prompt that actually contain the target sound spelling
     var targetWords: [String] {
         SpeechChallenge.targetWords(in: prompt, patterns: patterns)
     }
 
-    // extracts the words that contain any of the sound spelling patterns
+    // finds words containing the target sound
     static func targetWords(in prompt: String, patterns: [String]) -> [String] {
         let lowered = patterns.map { $0.lowercased() }
 
@@ -69,7 +66,7 @@ struct SpeechChallenge: Identifiable {
     }
 }
 
-// a target sound such as TH or SH with its eight ordered challenges
+// a sound with its own practice prompts
 struct SpeechSound: Identifiable {
     let id: String
     let symbol: String
@@ -78,10 +75,17 @@ struct SpeechSound: Identifiable {
     let patterns: [String]
     let prompts: [String]
 
-    // builds the eight challenges by pairing the shared techniques with this sound's prompts
+    // english sounds use the original techniques
+    // spanish sounds use four adapted techniques
     var challenges: [SpeechChallenge] {
-        zip(SpeechCatalog.techniques.enumerated(), prompts).map { pair, prompt in
+
+        let techniques = id.hasPrefix("ES-")
+            ? SpeechCatalog.spanishTechniques
+            : SpeechCatalog.techniques
+
+        return zip(techniques.enumerated(), prompts).map { pair, prompt in
             let (offset, technique) = pair
+
             return SpeechChallenge(
                 id: "\(id.lowercased())-\(offset + 1)",
                 index: offset + 1,
@@ -100,7 +104,7 @@ struct SpeechSound: Identifiable {
 // static content for the speech sound challenges feature
 enum SpeechCatalog {
 
-    // the eight technique slots, ordered from easiest to hardest
+    // original english techniques
     static let techniques: [ChallengeTechnique] = [
         ChallengeTechnique(
             title: "Easy Onset",
@@ -152,7 +156,35 @@ enum SpeechCatalog {
         )
     ]
 
-    // every practice sound with its own set of eight prompts
+    // four techniques adapted for spanish practice
+    static let spanishTechniques: [ChallengeTechnique] = [
+        ChallengeTechnique(
+            title: "Inicio suave",
+            difficulty: .easy,
+            hint: "Comienza cada palabra con calma, sin forzar la voz ni apresurarte.",
+            tip: "Relaja los músculos y comienza a hablar suavemente."
+        ),
+        ChallengeTechnique(
+            title: "Contactos suaves",
+            difficulty: .easy,
+            hint: "Pronuncia las palabras con movimientos suaves de los labios y la lengua.",
+            tip: "Evita presionar demasiado los labios al producir los sonidos."
+        ),
+        ChallengeTechnique(
+            title: "Habla prolongada",
+            difficulty: .intermediate,
+            hint: "Alarga ligeramente las vocales y conecta las palabras con suavidad.",
+            tip: "Habla lentamente y mantén un ritmo cómodo."
+        ),
+        ChallengeTechnique(
+            title: "Pausas y frases",
+            difficulty: .intermediate,
+            hint: "Divide la oración en frases cortas y realiza pausas naturales.",
+            tip: "Respira tranquilamente entre las frases y continúa sin apurarte."
+        )
+    ]
+
+    // original english sounds
     static let sounds: [SpeechSound] = [
         SpeechSound(
             id: "TH",
@@ -292,8 +324,40 @@ enum SpeechCatalog {
         )
     ]
 
+    // spanish sounds with four exercises each
+    static let spanishSounds: [SpeechSound] = [
+
+        SpeechSound(
+            id: "ES-P",
+            symbol: "P",
+            name: "Sonido P",
+            placementTip: "Junta los labios suavemente y sepáralos para producir el sonido P, evitando ejercer demasiada presión.",
+            patterns: ["p"],
+            prompts: [
+                "Papá prepara pan.",
+                "Pedro pinta una pared pequeña.",
+                "Paula pasea por el parque mientras Pedro prepara un pequeño picnic.",
+                "Por la mañana, Pedro prepara pan, Paula pone los platos y papá prepara el desayuno para compartir."
+            ]
+        ),
+
+        SpeechSound(
+            id: "ES-M",
+            symbol: "M",
+            name: "Sonido M",
+            placementTip: "Junta los labios suavemente y deja que el sonido M resuene por la nariz, sin presionarlos demasiado.",
+            patterns: ["m"],
+            prompts: [
+                "Mi mamá me mira.",
+                "María mueve las manos mientras murmura una melodía.",
+                "Mi mamá me muestra muchas maneras de mantener la calma mientras hablamos.",
+                "Mañana me reuniré con mis amigos, mientras mi mamá prepara una merienda para compartir."
+            ]
+        )
+    ]
+
     // looks up a sound by its identifier
     static func sound(id: String) -> SpeechSound? {
-        sounds.first { $0.id == id }
+        (sounds + spanishSounds).first { $0.id == id }
     }
 }

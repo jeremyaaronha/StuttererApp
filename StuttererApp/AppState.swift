@@ -16,6 +16,9 @@ final class AppState: ObservableObject {
 
     // whether the slide in side menu is open
     @Published var isMenuOpen: Bool = false
+    
+    // controls the settings screen
+    @Published var isSettingsOpen: Bool = false
 
     // whether the user has passed the welcome login screen
     @Published var isSignedIn: Bool

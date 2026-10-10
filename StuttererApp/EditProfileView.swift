@@ -38,7 +38,9 @@ struct EditProfileView: View {
                         ProfilePhoto(data: photoData, size: 96)
 
                         PhotosPicker(
-                            photoData == nil ? "Add Photo" : "Change Photo",
+                            photoData == nil
+                                ? LocalizedStringKey("Add Photo")
+                                : LocalizedStringKey("Change Photo"),
                             selection: $pickedItem,
                             matching: .images
                         )
@@ -58,18 +60,19 @@ struct EditProfileView: View {
                 Section("Name") {
                     TextField("First name", text: $firstName)
                         .textContentType(.givenName)
+
                     TextField("Last name", text: $lastName)
                         .textContentType(.familyName)
                 }
 
                 Section("Email") {
-                    Text(email ?? "No email")
+                    Text(email ?? String(localized: "No email"))
                         .foregroundColor(.secondary)
                 }
 
-                if let error = store.errorMessage {
+                if store.errorMessage != nil {
                     Section {
-                        Text(error)
+                        Text("Something went wrong. Please try again.")
                             .foregroundColor(.red)
                     }
                 }
@@ -78,19 +81,25 @@ struct EditProfileView: View {
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
                 ToolbarItem(placement: .cancellationAction) {
-                    Button("Cancel") { dismiss() }
+                    Button("Cancel") {
+                        dismiss()
+                    }
                 }
+
                 ToolbarItem(placement: .confirmationAction) {
                     if store.isSaving {
                         ProgressView()
                     } else {
-                        Button("Save") { save() }
+                        Button("Save") {
+                            save()
+                        }
                     }
                 }
             }
             // loads the picked photo and shrinks it before showing it
             .onChange(of: pickedItem) { _, item in
                 guard let item else { return }
+
                 Task {
                     if let data = try? await item.loadTransferable(type: Data.self) {
                         photoData = ProfileStore.compressedPhoto(from: data)
@@ -107,6 +116,7 @@ struct EditProfileView: View {
                 lastName: lastName,
                 photoData: photoData
             )
+
             if saved {
                 dismiss()
             }

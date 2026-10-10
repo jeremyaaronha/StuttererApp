@@ -1,6 +1,6 @@
 import SwiftUI
 
-// shows the eight ordered challenges for one target sound
+// shows the challenges available for one target sound
 struct ChallengeGridView: View {
 
     @EnvironmentObject private var progress: ChallengeProgressStore
@@ -60,12 +60,17 @@ struct ChallengeGridView: View {
             VStack(alignment: .leading, spacing: 10) {
                 HStack {
                     VStack(alignment: .leading, spacing: 2) {
-                        Text("\(sound.symbol) Sound Progress")
-                            .font(.subheadline.weight(.semibold))
+
+                        Text(
+                            "\(sound.symbol) \(String(localized: "Sound Progress"))"
+                        )
+                        .font(.subheadline.weight(.semibold))
+
                         Text("\(completed) of \(total) challenges mastered")
                             .font(.caption)
                             .foregroundColor(.secondary)
                     }
+
                     Spacer()
                 }
 
@@ -87,33 +92,43 @@ struct ChallengeGridView: View {
                     Text("#\(challenge.index)")
                         .font(.caption.weight(.bold))
                         .foregroundColor(.secondary)
+
                     Spacer()
+
                     if done {
                         Image(systemName: "checkmark.circle.fill")
                             .foregroundColor(.green)
                             .transition(.scale.combined(with: .opacity))
                     }
                 }
-                .animation(.spring(response: 0.4, dampingFraction: 0.6), value: done)
+                .animation(
+                    .spring(response: 0.4, dampingFraction: 0.6),
+                    value: done
+                )
 
-                Text(challenge.title)
+                Text(LocalizedStringKey(challenge.title))
                     .font(.subheadline.weight(.semibold))
                     .foregroundColor(.white)
                     .fixedSize(horizontal: false, vertical: true)
 
                 DifficultyPill(difficulty: challenge.difficulty)
             }
-            .frame(maxWidth: .infinity, minHeight: 120, alignment: .topLeading)
+            .frame(
+                maxWidth: .infinity,
+                minHeight: 120,
+                alignment: .topLeading
+            )
         }
     }
 }
 
 // small coloured pill showing a challenge difficulty
 struct DifficultyPill: View {
+
     let difficulty: ChallengeDifficulty
 
     var body: some View {
-        Text(difficulty.label)
+        Text(LocalizedStringKey(difficulty.label))
             .font(.caption2.weight(.semibold))
             .foregroundColor(difficulty.tint)
             .padding(.horizontal, 10)
@@ -125,6 +140,7 @@ struct DifficultyPill: View {
 
 // reusable top bar for pushed challenge screens with a back button
 struct ChallengeNavBar: View {
+
     @EnvironmentObject private var appState: AppState
 
     let title: String
@@ -140,14 +156,21 @@ struct ChallengeNavBar: View {
                     .foregroundColor(Theme.accent)
                     .frame(width: 44, height: 44)
                     .background(Theme.card)
-                    .clipShape(RoundedRectangle(cornerRadius: 12, style: .continuous))
+                    .clipShape(
+                        RoundedRectangle(
+                            cornerRadius: 12,
+                            style: .continuous
+                        )
+                    )
             }
             .accessibilityLabel("Back")
 
             VStack(alignment: .leading, spacing: 2) {
-                Text(title)
+
+                Text(LocalizedStringKey(title))
                     .font(.title2.weight(.bold))
-                Text(subtitle)
+
+                Text(LocalizedStringKey(subtitle))
                     .font(.caption.weight(.semibold))
                     .foregroundColor(.secondary)
             }
@@ -164,7 +187,12 @@ struct ChallengeNavBar: View {
                     .foregroundColor(.white)
                     .frame(width: 44, height: 44)
                     .background(Theme.card)
-                    .clipShape(RoundedRectangle(cornerRadius: 12, style: .continuous))
+                    .clipShape(
+                        RoundedRectangle(
+                            cornerRadius: 12,
+                            style: .continuous
+                        )
+                    )
             }
             .accessibilityLabel("Open menu")
         }
