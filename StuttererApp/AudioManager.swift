@@ -60,10 +60,6 @@ final class AudioManager: ObservableObject {
     // current user settings
     private var userID: String?
 
-    init() {
-    // prevents saving while loading settings
-    private var isLoadingSettings = false
-
     init(defaults: UserDefaults = .standard) {
         self.defaults = defaults
         configureSession()
@@ -75,8 +71,6 @@ final class AudioManager: ObservableObject {
     func loadSettings(for userID: String) {
 
         self.userID = userID
-
-        let defaults = UserDefaults.standard
 
 
         if defaults.object(forKey: delayTime1Key) != nil {
@@ -115,8 +109,6 @@ final class AudioManager: ObservableObject {
             return
         }
 
-
-        let defaults = UserDefaults.standard
 
 
         defaults.set(
@@ -174,7 +166,9 @@ final class AudioManager: ObservableObject {
                 .playAndRecord,
                 mode: .default,
                 options: [
-                    .allowBluetoothHFP, // renamed to HFP AFTER iOS 17
+                    // .allowBluetoothHFP is the iOS 26 name; Xcode 16.2 only
+                    // knows .allowBluetooth, which still works on iOS 26
+                    .allowBluetooth,
                     .allowBluetoothA2DP,
                     .defaultToSpeaker
                 ]

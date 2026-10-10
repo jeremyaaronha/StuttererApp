@@ -7,6 +7,10 @@ struct ProfileView: View {
     @EnvironmentObject private var auth: AuthManager
     @State private var showingHelpFAQ = false
     @State private var showingAboutDAF = false
+    @State private var showingEditProfile = false
+
+    // the signed in user's name and photo
+    @StateObject private var profile = ProfileStore()
 
     // profile menu options
     private let menuItems: [(title: String, systemImage: String)] = [
@@ -24,20 +28,9 @@ struct ProfileView: View {
             ScrollView {
                 VStack(spacing: 20) {
 
-                    VStack(spacing: 8) {
-                        Image(systemName: "person.crop.circle.fill")
-                            .font(.system(size: 64))
-                            .foregroundColor(Theme.accent)
-
-                        Text(appState.userName)
-                            .font(.title3.weight(.bold))
-
-                        Text("StuttererApp Account")
-                            .font(.caption)
-                            .foregroundColor(.secondary)
-                    }
-                    .padding(.top, 12)
-                    .appearCard()
+                    profileHeader
+                        .padding(.top, 12)
+                        .appearCard()
 
                     GlassCard {
                         VStack(spacing: 0) {
@@ -93,6 +86,7 @@ struct ProfileView: View {
                     // signs out of firebase, which sends the app back to the login screen
                     Button {
                         auth.signOut()
+                        profile.clear()
                         appState.signOut()
                     } label: {
                         Label("Sign Out", systemImage: "arrow.right.square")
@@ -119,6 +113,39 @@ struct ProfileView: View {
         }
         .sheet(isPresented: $showingAboutDAF) {
             AboutDAFView()
+        }
+        .sheet(isPresented: $showingEditProfile) {
+            EditProfileView(store: profile, email: auth.userEmail)
+        }
+        // loads again whenever a different user signs in
+        .task(id: auth.userID) {
+            if let userID = auth.userID {
+                await profile.load(userID: userID)
+            }
+        }
+    }
+
+    // photo, name, email, and the edit button at the top of the screen
+    private var profileHeader: some View {
+        VStack(spacing: 8) {
+            ProfilePhoto(data: profile.photoData, size: 80)
+
+            Text(profile.fullName ?? appState.userName)
+                .font(.title3.weight(.bold))
+
+            Text(auth.userEmail ?? "StuttererApp Account")
+                .font(.caption)
+                .foregroundColor(.secondary)
+
+            Button {
+                showingEditProfile = true
+            } label: {
+                Label("Edit Profile", systemImage: "pencil")
+                    .font(.subheadline.weight(.semibold))
+            }
+            .buttonStyle(.bordered)
+            .disabled(auth.userID == nil)
+            .padding(.top, 4)
         }
     }
 }

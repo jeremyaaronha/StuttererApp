@@ -80,11 +80,12 @@ final class SpeechChallengeRecognizer: ObservableObject {
         // configure the session for recording
         do {
             let session = AVAudioSession.sharedInstance()
-            // allowBluetoothHFP lets a paired Bluetooth headset act as the mic input
+            // allowBluetooth lets a paired Bluetooth headset act as the mic input
+            // (renamed allowBluetoothHFP in iOS 26, which Xcode 16.2 can't see)
             try session.setCategory(
                 .playAndRecord,
                 mode: .default,
-                options: [.duckOthers, .defaultToSpeaker, .allowBluetoothHFP]
+                options: [.duckOthers, .defaultToSpeaker, .allowBluetooth]
             )
             try session.setActive(true, options: .notifyOthersOnDeactivation)
         } catch {

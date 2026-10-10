@@ -4,6 +4,7 @@
 //
 
 import SwiftUI
+import GoogleSignInSwift
 
 // sign in and sign up screen
 struct AuthView: View {
@@ -102,18 +103,13 @@ struct AuthView: View {
 
                 // google makes the account the first time, so one button
                 // works for both sign in and sign up
-                Button {
+                // google's own button, so the logo and colors follow their
+                // branding rules
+                GoogleSignInButton(scheme: .light, style: .wide,
+                                   state: auth.isLoading ? .disabled : .normal) {
                     Task { await auth.signInWithGoogle() }
-                } label: {
-                    Text("Continue with Google")
-                        .font(.system(size: 18, weight: .semibold))
-                        .frame(width: 240, height: 50)
-                        .background(Color.white)
-                        .foregroundColor(.black)
-                        .cornerRadius(25)
-                        .shadow(radius: 10)
                 }
-                .disabled(auth.isLoading)
+                .frame(width: 240)
 
                 // sends a reset link, only useful when signing in
                 if !isSignUp {
