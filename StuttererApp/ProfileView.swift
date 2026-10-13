@@ -8,6 +8,10 @@ struct ProfileView: View {
     @State private var showingHelpFAQ = false
     @State private var showingAboutDAF = false
     @State private var showingSettings = false
+    @State private var showingEditProfile = false
+
+    // the signed in user's name and photo
+    @StateObject private var profile = ProfileStore()
 
     // profile menu options
     private let menuItems: [(title: String, systemImage: String)] = [
@@ -26,20 +30,9 @@ struct ProfileView: View {
             ScrollView {
                 VStack(spacing: 20) {
 
-                    VStack(spacing: 8) {
-                        Image(systemName: "person.crop.circle.fill")
-                            .font(.system(size: 64))
-                            .foregroundColor(Theme.accent)
-
-                        Text(appState.userName)
-                            .font(.title3.weight(.bold))
-
-                        Text("StuttererApp Account")
-                            .font(.caption)
-                            .foregroundColor(.secondary)
-                    }
-                    .padding(.top, 12)
-                    .appearCard()
+                    profileHeader
+                        .padding(.top, 12)
+                        .appearCard()
 
                     ThemePill()
                         .appearCard(delay: 0.04)
@@ -76,7 +69,7 @@ struct ProfileView: View {
                                             .foregroundColor(Theme.accent)
                                             .frame(width: 24)
 
-                                        Text(item.title)
+                                        Text(LocalizedStringKey(item.title))
                                             .font(.subheadline)
 
                                         Spacer()
@@ -100,6 +93,7 @@ struct ProfileView: View {
                     // signs out of firebase, which sends the app back to the login screen
                     Button {
                         auth.signOut()
+                        profile.clear()
                         appState.signOut()
                     } label: {
                         Label("Sign Out", systemImage: "arrow.right.square")
@@ -129,6 +123,38 @@ struct ProfileView: View {
         }
         .sheet(isPresented: $showingSettings) {
             SettingsView()
+        .sheet(isPresented: $showingEditProfile) {
+            EditProfileView(store: profile, email: auth.userEmail)
+        }
+        // loads again whenever a different user signs in
+        .task(id: auth.userID) {
+            if let userID = auth.userID {
+                await profile.load(userID: userID)
+            }
+        }
+    }
+
+    // photo, name, email, and the edit button at the top of the screen
+    private var profileHeader: some View {
+        VStack(spacing: 8) {
+            ProfilePhoto(data: profile.photoData, size: 80)
+
+            Text(profile.fullName ?? appState.userName)
+                .font(.title3.weight(.bold))
+
+            Text(auth.userEmail ?? String(localized: "StuttererApp Account"))
+                .font(.caption)
+                .foregroundColor(.secondary)
+
+            Button {
+                showingEditProfile = true
+            } label: {
+                Label("Edit Profile", systemImage: "pencil")
+                    .font(.subheadline.weight(.semibold))
+            }
+            .buttonStyle(.bordered)
+            .disabled(auth.userID == nil)
+            .padding(.top, 4)
         }
     }
 }
@@ -158,9 +184,7 @@ struct HelpFAQView: View {
 
                         faqItem(
                             question: "Do I need headphones?",
-                            answer: "Yes. Headphones are required to hear the delayed voice feedback "
-                                + "correctly and avoid audio feedback from the speaker. You can use wired "
-                                + "or Bluetooth headphones."
+                            answer: "Yes. Headphones are required to hear the delayed voice feedback correctly and avoid audio feedback from the speaker. You can use wired or Bluetooth headphones."
                         )
 
                         faqItem(
@@ -170,8 +194,7 @@ struct HelpFAQView: View {
 
                         faqItem(
                             question: "What are saved practice texts?",
-                            answer: "You can create and save texts in the Texts tab. Your texts are "
-                                + "saved to your account so you can use them again later."
+                            answer: "You can create and save texts in the Texts tab. Your texts are saved to your account so you can use them again later."
                         )
 
                         faqItem(
@@ -196,8 +219,8 @@ struct HelpFAQView: View {
 
     // shows one question and answer
     private func faqItem(
-        question: String,
-        answer: String
+        question: LocalizedStringKey,
+        answer: LocalizedStringKey
     ) -> some View {
 
         GlassCard {

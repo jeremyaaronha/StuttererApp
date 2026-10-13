@@ -43,6 +43,7 @@ final class AudioManagerTests: XCTestCase {
         audioManager.loadSettings(for: "user123")
         audioManager.delayTime1 = 0.4
         audioManager.voiceEffect = 12
+        audioManager.saveSettings()
 
         // simulates relaunch: fresh AudioManager, same defaults suite
         let reloaded = AudioManager(defaults: testDefaults)
@@ -55,6 +56,7 @@ final class AudioManagerTests: XCTestCase {
     func testDifferentUsersDontShareSettings() {
         audioManager.loadSettings(for: "userA")
         audioManager.delayTime1 = 0.05
+        audioManager.saveSettings()
 
         let other = AudioManager(defaults: testDefaults)
         other.loadSettings(for: "userB")

@@ -16,6 +16,9 @@ final class AppState: ObservableObject {
 
     // whether the slide in side menu is open
     @Published var isMenuOpen: Bool = false
+    
+    // controls the settings screen
+    @Published var isSettingsOpen: Bool = false
 
     // a sheet presented globally, used by the side menu to open Settings etc.
     @Published var activeSheet: AppSheet?

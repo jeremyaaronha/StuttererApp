@@ -61,22 +61,16 @@ struct SideMenu: View {
                     VStack(spacing: 4) {
                         ForEach(items, id: \.title) { item in
                             Button {
-                                // navigate to a tab, open a sheet, or just close
-                                if let tab = item.tab {
-                                    appState.selectedTab = tab
+                                // navigate if the item has a tab otherwise just close
+                                if item.title == "Settings" {
+                                    close()
+                                    appState.isSettingsOpen = true
                                 } else {
-                                    switch item.title {
-                                    case "Settings":
-                                        appState.activeSheet = .settings
-                                    case "Help & FAQ":
-                                        appState.activeSheet = .helpFAQ
-                                    case "About DAF Technique":
-                                        appState.activeSheet = .aboutDAF
-                                    default:
-                                        break
+                                    if let tab = item.tab {
+                                        appState.selectedTab = tab
                                     }
+                                    close()
                                 }
-                                close()
                             } label: {
                                 menuRow(title: item.title, systemImage: item.systemImage)
                             }
@@ -122,7 +116,7 @@ struct SideMenu: View {
                 .font(.body)
                 .foregroundColor(tint == .white ? Theme.accent : tint)
                 .frame(width: 24)
-            Text(title)
+            Text(LocalizedStringKey(title))
                 .font(.body)
                 .foregroundColor(tint)
             Spacer()

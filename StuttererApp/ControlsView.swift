@@ -7,6 +7,9 @@ struct ControlsView: View {
 
     @ObservedObject var audioManager: AudioManager
 
+    // shows "Saved" on the button for a moment after a tap
+    @State private var showSaved = false
+
     var body: some View {
 
         ZStack {
@@ -120,6 +123,31 @@ struct ControlsView: View {
 
                             Button {
 
+                                audioManager.saveSettings()
+                                showSaved = true
+
+                                Task {
+                                    try? await Task.sleep(for: .seconds(1.5))
+                                    showSaved = false
+                                }
+
+                            } label: {
+
+                                Text(
+                                    LocalizedStringKey(
+                                        showSaved ? "Saved" : "Save Settings"
+                                    )
+                                )
+                                .font(.headline)
+                                .frame(maxWidth: .infinity)
+                                .padding()
+                                .background(Color.cyan.opacity(0.7))
+                                .cornerRadius(20)
+                            }
+
+
+                            Button {
+
                                 audioManager.resetSettings()
 
                             } label: {
@@ -141,9 +169,9 @@ struct ControlsView: View {
                             } label: {
 
                                 Text(
-                                    audioManager.isRunning
-                                    ? "Stop"
-                                    : "Start"
+                                    LocalizedStringKey(
+                                        audioManager.isRunning ? "Stop" : "Start"
+                                    )
                                 )
                                 .font(.headline)
                                 .frame(maxWidth: .infinity)
@@ -175,7 +203,7 @@ struct ControlsView: View {
 
             HStack {
 
-                Text(title)
+                Text(LocalizedStringKey(title))
                     .font(.headline)
 
                 Spacer()

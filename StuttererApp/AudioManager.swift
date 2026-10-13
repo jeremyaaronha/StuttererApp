@@ -75,8 +75,6 @@ final class AudioManager: ObservableObject {
 
         self.userID = userID
 
-        let defaults = UserDefaults.standard
-
 
         if defaults.object(forKey: delayTime1Key) != nil {
             delayTime1 = defaults.double(forKey: delayTime1Key)
@@ -114,8 +112,6 @@ final class AudioManager: ObservableObject {
             return
         }
 
-
-        let defaults = UserDefaults.standard
 
 
         defaults.set(
@@ -173,7 +169,9 @@ final class AudioManager: ObservableObject {
                 .playAndRecord,
                 mode: .default,
                 options: [
-                    .allowBluetoothHFP, // renamed to HFP AFTER iOS 17
+                    // .allowBluetoothHFP is the iOS 26 name; Xcode 16.2 only
+                    // knows .allowBluetooth, which still works on iOS 26
+                    .allowBluetooth,
                     .allowBluetoothA2DP,
                     .defaultToSpeaker
                 ]
