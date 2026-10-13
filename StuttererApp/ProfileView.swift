@@ -7,6 +7,7 @@ struct ProfileView: View {
     @EnvironmentObject private var auth: AuthManager
     @State private var showingHelpFAQ = false
     @State private var showingAboutDAF = false
+    @State private var showingSettings = false
     @State private var showingEditProfile = false
 
     // the signed in user's name and photo
@@ -17,6 +18,7 @@ struct ProfileView: View {
         ("Practice Board", "waveform"),
         ("Delay Tuning Engine", "slider.horizontal.3"),
         ("My Reading Library", "text.book.closed"),
+        ("Settings", "gearshape"),
         ("Help & FAQ", "questionmark.circle"),
         ("About DAF Technique", "book")
     ]
@@ -31,6 +33,9 @@ struct ProfileView: View {
                     profileHeader
                         .padding(.top, 12)
                         .appearCard()
+
+                    ThemePill()
+                        .appearCard(delay: 0.04)
 
                     GlassCard {
                         VStack(spacing: 0) {
@@ -48,6 +53,8 @@ struct ProfileView: View {
                                         appState.selectedTab = .controls
                                     case "My Reading Library":
                                         appState.selectedTab = .texts
+                                    case "Settings":
+                                        showingSettings = true
                                     case "Help & FAQ":
                                         showingHelpFAQ = true
                                     case "About DAF Technique":
@@ -114,6 +121,8 @@ struct ProfileView: View {
         .sheet(isPresented: $showingAboutDAF) {
             AboutDAFView()
         }
+        .sheet(isPresented: $showingSettings) {
+            SettingsView()
         .sheet(isPresented: $showingEditProfile) {
             EditProfileView(store: profile, email: auth.userEmail)
         }

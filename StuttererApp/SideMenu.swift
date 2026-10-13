@@ -13,7 +13,6 @@ struct SideMenu: View {
         ("Delay Tuning Engine", "slider.horizontal.3", .controls),
         ("My Reading Library", "text.book.closed", .texts),
         ("Speech Sound Challenges", "quote.bubble", .challenges),
-        ("Therapist Reports", "chart.line.uptrend.xyaxis", nil),
         ("Settings", "gearshape", nil),
         ("Help & FAQ", "questionmark.circle", nil),
         ("About DAF Technique", "book", nil)

@@ -60,6 +60,9 @@ final class AudioManager: ObservableObject {
     // current user settings
     private var userID: String?
 
+    // prevents saving while loading settings
+    private var isLoadingSettings = false
+
     init(defaults: UserDefaults = .standard) {
         self.defaults = defaults
         configureSession()

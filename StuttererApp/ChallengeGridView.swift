@@ -108,7 +108,7 @@ struct ChallengeGridView: View {
 
                 Text(LocalizedStringKey(challenge.title))
                     .font(.subheadline.weight(.semibold))
-                    .foregroundColor(.white)
+                    .foregroundColor(Theme.textPrimary)
                     .fixedSize(horizontal: false, vertical: true)
 
                 DifficultyPill(difficulty: challenge.difficulty)

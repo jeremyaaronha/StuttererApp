@@ -68,6 +68,16 @@ struct MainTabView: View {
                     .zIndex(1)
             }
         }
+        .sheet(item: $appState.activeSheet) { sheet in
+            switch sheet {
+            case .settings:
+                SettingsView()
+            case .helpFAQ:
+                HelpFAQView()
+            case .aboutDAF:
+                AboutDAFView()
+            }
+        }
         .environment(\.locale, Locale(identifier: appLanguage))
         .onAppear {
 
