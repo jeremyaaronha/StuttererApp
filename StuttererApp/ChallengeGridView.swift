@@ -61,9 +61,10 @@ struct ChallengeGridView: View {
                 HStack {
                     VStack(alignment: .leading, spacing: 2) {
 
-                        Text(
-                            "\(sound.symbol) \(String(localized: "Sound Progress"))"
-                        )
+                        HStack(spacing: 4) {
+                            Text(sound.symbol)
+                            Text("Sound Progress")
+                        }
                         .font(.subheadline.weight(.semibold))
 
                         Text("\(completed) of \(total) challenges mastered")

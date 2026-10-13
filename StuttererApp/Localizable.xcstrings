@@ -10,16 +10,6 @@
     "#%lld" : {
 
     },
-    "%@ %@" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "new",
-            "value" : "%1$@ %2$@"
-          }
-        }
-      }
-    },
     "%@ Challenge" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -304,6 +294,9 @@
         }
       }
     },
+    "Confirm Password" : {
+
+    },
     "Controls" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -553,7 +546,7 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "EJERCICIO PARA MEJORAR LA FLUIDEZ"
+            "value" : "    FLUENCY-BUILDING EXERCISE"
           }
         },
         "es" : {
@@ -570,7 +563,7 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "EJERCICIOS PARA MEJORAR LA FLUIDEZ"
+            "value" : "    FLUENCY-BUILDING EXERCISES"
           }
         },
         "es" : {
@@ -631,6 +624,7 @@
       }
     },
     "Heard: \"%@\"" : {
+      "extractionState" : "stale",
       "localizations" : {
         "es" : {
           "stringUnit" : {
@@ -710,10 +704,16 @@
     "Key 3" : {
       "extractionState" : "manual"
     },
+    "Key 4" : {
+      "extractionState" : "manual"
+    },
     "Key 5" : {
       "extractionState" : "manual"
     },
     "Key 6" : {
+      "extractionState" : "manual"
+    },
+    "Key 7" : {
       "extractionState" : "manual"
     },
     "Language" : {
@@ -1201,6 +1201,17 @@
         }
       }
     },
+    "Sign in with Google" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Iniciar sesión con Google"
+          }
+        }
+      }
+    },
     "Sign Out" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -1216,15 +1227,7 @@
 
     },
     "Something went wrong. Please try again." : {
-      "extractionState" : "manual",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Ocurrió un problema. Inténtalo nuevamente."
-          }
-        }
-      }
+      "extractionState" : "manual"
     },
     "Sound Progress" : {
       "localizations" : {
@@ -1370,6 +1373,12 @@
       }
     },
     "StuttererApp v1.0" : {
+
+    },
+    "Switch to dark mode" : {
+
+    },
+    "Switch to light mode" : {
 
     },
     "Text to Speech" : {
@@ -1640,6 +1649,7 @@
       }
     },
     "You hit %lld of %lld target %@ words." : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {

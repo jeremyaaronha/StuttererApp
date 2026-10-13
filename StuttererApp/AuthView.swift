@@ -12,6 +12,9 @@ struct AuthView: View {
     // shared login state from the app
     @EnvironmentObject private var auth: AuthManager
 
+    // selected app language
+    @AppStorage("appLanguage") private var appLanguage = "en"
+
     // true shows sign up, false shows sign in
     @State private var isSignUp = false
 
@@ -43,27 +46,42 @@ struct AuthView: View {
                     .padding(.bottom, 20)
 
                 // email field
-                TextField("", text: $email, prompt: placeholder("Email"))
-                    .keyboardType(.emailAddress)
-                    .textContentType(.username)
-                    .textInputAutocapitalization(.never)
-                    .autocorrectionDisabled()
-                    .modifier(AuthFieldStyle())
+                TextField(
+                    "",
+                    text: $email,
+                    prompt: placeholder("Email")
+                )
+                .keyboardType(.emailAddress)
+                .textContentType(.username)
+                .textInputAutocapitalization(.never)
+                .autocorrectionDisabled()
+                .modifier(AuthFieldStyle())
 
                 // password field
-                SecureField("", text: $password, prompt: placeholder("Password"))
-                    .textContentType(isSignUp ? .newPassword : .password)
-                    .modifier(AuthFieldStyle())
+                SecureField(
+                    "",
+                    text: $password,
+                    prompt: placeholder("Password")
+                )
+                .textContentType(isSignUp ? .newPassword : .password)
+                .modifier(AuthFieldStyle())
 
                 // only needed when creating an account
                 if isSignUp {
-                    SecureField("", text: $confirmPassword, prompt: placeholder("Confirm Password"))
-                        .textContentType(.newPassword)
-                        .modifier(AuthFieldStyle())
 
-                    Text("At least \(AuthValidator.minPasswordLength) characters, with a letter and a number.")
-                        .font(.footnote)
-                        .foregroundColor(.white.opacity(0.7))
+                    SecureField(
+                        "",
+                        text: $confirmPassword,
+                        prompt: placeholder("Confirm Password")
+                    )
+                    .textContentType(.newPassword)
+                    .modifier(AuthFieldStyle())
+
+                    Text(
+                        "At least \(AuthValidator.minPasswordLength) characters, with a letter and a number."
+                    )
+                    .font(.footnote)
+                    .foregroundColor(.white.opacity(0.7))
                 }
 
                 // shows what went wrong
@@ -85,11 +103,18 @@ struct AuthView: View {
                 // sign in or sign up button
                 Button(action: submit) {
                     ZStack {
+
                         if auth.isLoading {
-                            ProgressView().tint(.white)
+                            ProgressView()
+                                .tint(.white)
                         } else {
                             Text(isSignUp ? "Sign Up" : "Sign In")
-                                .font(.system(size: 22, weight: .bold))
+                                .font(
+                                    .system(
+                                        size: 22,
+                                        weight: .bold
+                                    )
+                                )
                         }
                     }
                     .frame(width: 200, height: 60)
@@ -101,20 +126,36 @@ struct AuthView: View {
                 .disabled(auth.isLoading)
                 .padding(.top, 10)
 
-                // google makes the account the first time, so one button
-                // works for both sign in and sign up
-                // google's own button, so the logo and colors follow their
-                // branding rules
-                GoogleSignInButton(scheme: .light, style: .wide,
-                                   state: auth.isLoading ? .disabled : .normal) {
-                    Task { await auth.signInWithGoogle() }
+                // google sign in button with app localization
+                Button {
+                    Task {
+                        await auth.signInWithGoogle()
+                    }
+                } label: {
+
+                    HStack(spacing: 12) {
+
+                        Image(systemName: "g.circle.fill")
+                            .font(.system(size: 22))
+                            .foregroundColor(.blue)
+
+                        Text("Sign in with Google")
+                            .font(.system(size: 15, weight: .medium))
+                            .foregroundColor(.black)
+                    }
+                    .frame(width: 240, height: 44)
+                    .background(Color.white)
+                    .cornerRadius(8)
                 }
-                .frame(width: 240)
+                .disabled(auth.isLoading)
+                .opacity(auth.isLoading ? 0.6 : 1)
 
                 // sends a reset link, only useful when signing in
                 if !isSignUp {
                     Button("Forgot password?") {
-                        Task { await auth.resetPassword(email: email) }
+                        Task {
+                            await auth.resetPassword(email: email)
+                        }
                     }
                     .font(.footnote)
                     .foregroundColor(.cyan)
@@ -122,8 +163,11 @@ struct AuthView: View {
                 }
 
                 // switches between sign in and sign up
-                Button(isSignUp ? "Already have an account? Sign in"
-                                : "Don't have an account? Sign up") {
+                Button(
+                    isSignUp
+                        ? "Already have an account? Sign in"
+                        : "Don't have an account? Sign up"
+                ) {
                     isSignUp.toggle()
                     confirmPassword = ""
                     auth.errorMessage = nil
@@ -133,31 +177,43 @@ struct AuthView: View {
 
                 // warns right away instead of waiting for a button tap
                 if !auth.isConfigured {
-                    Text("Firebase isn't set up yet. Add GoogleService-Info.plist to the project.")
-                        .font(.footnote)
-                        .foregroundColor(.yellow)
-                        .multilineTextAlignment(.center)
-                        .padding(.top, 10)
+                    Text(
+                        "Firebase isn't set up yet. Add GoogleService-Info.plist to the project."
+                    )
+                    .font(.footnote)
+                    .foregroundColor(.yellow)
+                    .multilineTextAlignment(.center)
+                    .padding(.top, 10)
                 }
             }
             .padding(.horizontal, 30)
         }
+        .environment(
+            \.locale,
+            Locale(identifier: appLanguage)
+        )
     }
 
     // light gray hint text that shows on the dark background
-    private func placeholder(_ text: String) -> Text {
-        Text(text).foregroundColor(.white.opacity(0.6))
+    private func placeholder(_ text: LocalizedStringKey) -> Text {
+        Text(text)
+            .foregroundColor(.white.opacity(0.6))
     }
 
     // sends the form to the auth manager
     private func submit() {
         Task {
             if isSignUp {
-                await auth.signUp(email: email,
-                                  password: password,
-                                  confirmPassword: confirmPassword)
+                await auth.signUp(
+                    email: email,
+                    password: password,
+                    confirmPassword: confirmPassword
+                )
             } else {
-                await auth.signIn(email: email, password: password)
+                await auth.signIn(
+                    email: email,
+                    password: password
+                )
             }
         }
     }
@@ -165,6 +221,7 @@ struct AuthView: View {
 
 // look shared by the text fields
 private struct AuthFieldStyle: ViewModifier {
+
     func body(content: Content) -> some View {
         content
             .padding()

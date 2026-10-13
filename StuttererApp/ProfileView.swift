@@ -123,6 +123,7 @@ struct ProfileView: View {
         }
         .sheet(isPresented: $showingSettings) {
             SettingsView()
+        }
         .sheet(isPresented: $showingEditProfile) {
             EditProfileView(store: profile, email: auth.userEmail)
         }

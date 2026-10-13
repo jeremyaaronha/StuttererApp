@@ -7,6 +7,7 @@ struct ChallengeDetailView: View {
     @EnvironmentObject private var progress: ChallengeProgressStore
     @Environment(\.dismiss) private var dismiss
 
+    @AppStorage("appLanguage") private var appLanguage = "en"
     @StateObject private var recognizer = SpeechChallengeRecognizer()
 
     let sound: SpeechSound
@@ -18,6 +19,11 @@ struct ChallengeDetailView: View {
     // checks if this is a spanish challenge
     private var isSpanishChallenge: Bool {
         sound.id.hasPrefix("ES-")
+    }
+
+    // selected app language
+    private var selectedLocale: Locale {
+        Locale(identifier: appLanguage)
     }
 
     // true once an attempt has been scored and we are no longer recording
@@ -38,14 +44,23 @@ struct ChallengeDetailView: View {
                         onBack: { dismiss() }
                     )
 
-                    Text(
-                        "\(localizedDifficulty.uppercased()) \(String(localized: "FLUENCY CHALLENGE"))"
-                    )
+                    HStack(spacing: 4) {
+                        Text(
+                            LocalizedStringKey(
+                                challenge.difficulty.label
+                            )
+                        )
+
+                        Text("FLUENCY CHALLENGE")
+                    }
                     .font(.caption.weight(.bold))
+                    .textCase(.uppercase)
                     .foregroundColor(challenge.difficulty.tint)
                     .padding(.horizontal, 14)
                     .padding(.vertical, 6)
-                    .background(challenge.difficulty.tint.opacity(0.18))
+                    .background(
+                        challenge.difficulty.tint.opacity(0.18)
+                    )
                     .clipShape(Capsule())
 
                     promptCard
@@ -59,16 +74,19 @@ struct ChallengeDetailView: View {
                             .multilineTextAlignment(.center)
                     }
 
-                    if let result = recognizer.lastResult, !recognizer.isRecording {
+                    if let result = recognizer.lastResult,
+                       !recognizer.isRecording {
+
                         resultCard(result)
-                            .transition(.opacity.combined(with: .scale(scale: 0.95)))
+                            .transition(
+                                .opacity.combined(
+                                    with: .scale(scale: 0.95)
+                                )
+                            )
                     }
 
                     Text(
-                        String(
-                            format: String(localized: "Speak the sentence aloud using gentle %@ placement."),
-                            sound.symbol
-                        )
+                        "Speak the sentence aloud using gentle \(sound.symbol) placement."
                     )
                     .font(.footnote)
                     .foregroundColor(.secondary)
@@ -77,7 +95,10 @@ struct ChallengeDetailView: View {
                     recordButton
                 }
                 .padding(24)
-                .animation(.easeInOut(duration: 0.3), value: hasResult)
+                .animation(
+                    .easeInOut(duration: 0.3),
+                    value: hasResult
+                )
             }
         }
         .navigationBarBackButtonHidden(true)
@@ -93,18 +114,37 @@ struct ChallengeDetailView: View {
         }
     }
 
-    // localized challenge title
-    private var challengeTitle: String {
-        let title = String(localized: String.LocalizationValue(challenge.title))
-        return String(
-            format: String(localized: "%@ Challenge"),
-            title
+    // translates a string using the selected app language
+    private func localized(_ key: String) -> String {
+        String(
+            localized: String.LocalizationValue(key),
+            locale: selectedLocale
         )
     }
 
-    // localized difficulty
-    private var localizedDifficulty: String {
-        String(localized: String.LocalizationValue(challenge.difficulty.label))
+    // translates a formatted string using the selected app language
+    private func localized(
+        _ key: String,
+        _ arguments: CVarArg...
+    ) -> String {
+
+        let format = localized(key)
+
+        return String(
+            format: format,
+            locale: selectedLocale,
+            arguments: arguments
+        )
+    }
+
+    // localized challenge title
+    private var challengeTitle: String {
+        let title = localized(challenge.title)
+
+        return localized(
+            "%@ Challenge",
+            title
+        )
     }
 
     // the fluency sentence with the target sound words highlighted
@@ -166,7 +206,10 @@ struct ChallengeDetailView: View {
     }
 
     // feedback shown after a recording attempt
-    private func resultCard(_ result: ChallengeResult) -> some View {
+    private func resultCard(
+        _ result: ChallengeResult
+    ) -> some View {
+
         GlassCard {
             VStack(alignment: .leading, spacing: 8) {
 
@@ -177,19 +220,23 @@ struct ChallengeDetailView: View {
                             ? "checkmark.seal.fill"
                             : "arrow.clockwise.circle.fill"
                     )
-                    .foregroundColor(result.passed ? .green : .orange)
+                    .foregroundColor(
+                        result.passed ? .green : .orange
+                    )
 
                     Text(
                         LocalizedStringKey(
-                            result.passed ? "Great work!" : "Keep practicing"
+                            result.passed
+                                ? "Great work!"
+                                : "Keep practicing"
                         )
                     )
                     .font(.headline)
                 }
 
                 Text(
-                    String(
-                        format: String(localized: "You hit %lld of %lld target %@ words."),
+                    localized(
+                        "You hit %lld of %lld target %@ words.",
                         result.matchedTargets.count,
                         result.totalTargets,
                         sound.symbol
@@ -200,8 +247,8 @@ struct ChallengeDetailView: View {
 
                 if result.repetitions > 0 {
                     Text(
-                        String(
-                            format: String(localized: "Noticed %lld repeated words — try an easy, smooth restart next time."),
+                        localized(
+                            "Noticed %lld repeated words — try an easy, smooth restart next time.",
                             result.repetitions
                         )
                     )
@@ -211,8 +258,8 @@ struct ChallengeDetailView: View {
 
                 if !recognizer.transcript.isEmpty {
                     Text(
-                        String(
-                            format: String(localized: "Heard: \"%@\""),
+                        localized(
+                            "Heard: \"%@\"",
                             recognizer.transcript
                         )
                     )
@@ -231,7 +278,10 @@ struct ChallengeDetailView: View {
                     .padding(.top, 4)
                 }
             }
-            .frame(maxWidth: .infinity, alignment: .leading)
+            .frame(
+                maxWidth: .infinity,
+                alignment: .leading
+            )
         }
     }
 
@@ -306,19 +356,32 @@ struct HighlightedPromptText: View {
 
     var body: some View {
         let words = prompt
-            .split(separator: " ", omittingEmptySubsequences: false)
+            .split(
+                separator: " ",
+                omittingEmptySubsequences: false
+            )
             .map(String.init)
 
         return words.enumerated().reduce(Text("")) { partial, item in
             let (index, word) = item
 
             let isTarget = patterns.contains {
-                word.lowercased().contains($0.lowercased())
+                word.lowercased().contains(
+                    $0.lowercased()
+                )
             }
 
             let piece = Text(word)
-                .foregroundColor(isTarget ? Theme.accent : Theme.textPrimary)
-                .fontWeight(isTarget ? .bold : .regular)
+                .foregroundColor(
+                    isTarget
+                        ? Theme.accent
+                        : Theme.textPrimary
+                )
+                .fontWeight(
+                    isTarget
+                        ? .bold
+                        : .regular
+                )
 
             let separator = index == words.count - 1
                 ? Text("")
