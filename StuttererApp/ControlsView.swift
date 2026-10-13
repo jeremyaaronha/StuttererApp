@@ -133,12 +133,16 @@ struct ControlsView: View {
 
                             } label: {
 
-                                Text(showSaved ? "Saved" : "Save Settings")
-                                    .font(.headline)
-                                    .frame(maxWidth: .infinity)
-                                    .padding()
-                                    .background(Color.cyan.opacity(0.7))
-                                    .cornerRadius(20)
+                                Text(
+                                    LocalizedStringKey(
+                                        showSaved ? "Saved" : "Save Settings"
+                                    )
+                                )
+                                .font(.headline)
+                                .frame(maxWidth: .infinity)
+                                .padding()
+                                .background(Color.cyan.opacity(0.7))
+                                .cornerRadius(20)
                             }
 
 
@@ -165,9 +169,9 @@ struct ControlsView: View {
                             } label: {
 
                                 Text(
-                                    audioManager.isRunning
-                                    ? "Stop"
-                                    : "Start"
+                                    LocalizedStringKey(
+                                        audioManager.isRunning ? "Stop" : "Start"
+                                    )
                                 )
                                 .font(.headline)
                                 .frame(maxWidth: .infinity)
@@ -199,7 +203,7 @@ struct ControlsView: View {
 
             HStack {
 
-                Text(title)
+                Text(LocalizedStringKey(title))
                     .font(.headline)
 
                 Spacer()

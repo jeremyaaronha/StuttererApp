@@ -11,6 +11,8 @@ struct MainTabView: View {
 
     @StateObject private var audioManager = AudioManager()
 
+    // saves the selected language
+    @AppStorage("appLanguage") private var appLanguage = "en"
 
     var body: some View {
 
@@ -53,6 +55,10 @@ struct MainTabView: View {
                     .tag(MainTab.profile)
             }
             .tint(Theme.accent)
+            .sheet(isPresented: $appState.isSettingsOpen) {
+                SettingsView()
+                    .preferredColorScheme(.dark)
+            }
 
 
             // slide in side menu overlay opened by the hamburger button
@@ -62,6 +68,17 @@ struct MainTabView: View {
                     .zIndex(1)
             }
         }
+        .sheet(item: $appState.activeSheet) { sheet in
+            switch sheet {
+            case .settings:
+                SettingsView()
+            case .helpFAQ:
+                HelpFAQView()
+            case .aboutDAF:
+                AboutDAFView()
+            }
+        }
+        .environment(\.locale, Locale(identifier: appLanguage))
         .onAppear {
 
             // load saved audio settings for the current user

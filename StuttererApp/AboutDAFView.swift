@@ -11,7 +11,7 @@ struct AboutDAFView: View {
 
     var body: some View {
         NavigationView {
-        ZStack {
+            ZStack {
                 Theme.background.ignoresSafeArea()
 
                 ScrollView {
@@ -19,36 +19,22 @@ struct AboutDAFView: View {
 
                         infoCard(
                             title: "What is DAF?",
-                            body: "Delayed Auditory Feedback (DAF) plays your own voice back to you through "
-                                + "headphones with a tiny delay — usually a fraction of a second. Hearing "
-                                + "yourself slightly later changes how you monitor your speech and often "
-                                + "encourages a slower, smoother pace."
+                            body: "Delayed Auditory Feedback (DAF) plays your own voice back to you through headphones with a tiny delay — usually a fraction of a second. Hearing yourself slightly later changes how you monitor your speech and often encourages a slower, smoother pace."
                         )
 
                         infoCard(
                             title: "The Choral Voice Effect",
-                            body: "Many people who stutter become noticeably more fluent when they speak at "
-                                + "the same time as another voice. This is called choral speech, or the "
-                                + "\u{201C}choral voice\u{201D} effect. DAF recreates a similar altered-hearing "
-                                + "condition on your own: by feeding your voice back with a delay, the app "
-                                + "mimics the supportive feeling of speaking alongside someone else."
+                            body: "Many people who stutter become noticeably more fluent when they speak at the same time as another voice. This is called choral speech, or the “choral voice” effect. DAF recreates a similar altered-hearing condition on your own: by feeding your voice back with a delay, the app mimics the supportive feeling of speaking alongside someone else."
                         )
 
                         infoCard(
                             title: "How It May Support Fluency",
-                            body: "Research has reported that DAF can reduce stuttering for many speakers, "
-                                + "sometimes with large immediate improvements in fluency and without making "
-                                + "speech sound unnatural. Results vary from person to person, and some "
-                                + "studies have found only a limited effect during spontaneous conversation. "
-                                + "DAF works best as regular practice over time rather than a one-time fix."
+                            body: "Research has reported that DAF can reduce stuttering for many speakers, sometimes with large immediate improvements in fluency and without making speech sound unnatural. Results vary from person to person, and some studies have found only a limited effect during spontaneous conversation. DAF works best as regular practice over time rather than a one-time fix."
                         )
 
                         infoCard(
                             title: "A Practice Tool, Not a Cure",
-                            body: "StuttererApp is a self-guided practice tool. It is not a medical treatment "
-                                + "and does not cure stuttering. Everyone responds differently, so for "
-                                + "personalized support we encourage working with a licensed "
-                                + "speech-language pathologist."
+                            body: "StuttererApp is a self-guided practice tool. It is not a medical treatment and does not cure stuttering. Everyone responds differently, so for personalized support we encourage working with a licensed speech-language pathologist."
                         )
 
                         referenceCard
@@ -70,8 +56,8 @@ struct AboutDAFView: View {
 
     // one titled explanation block
     private func infoCard(
-        title: String,
-        body: String
+        title: LocalizedStringKey,
+        body: LocalizedStringKey
     ) -> some View {
 
         GlassCard {
@@ -100,15 +86,15 @@ struct AboutDAFView: View {
                     .font(.caption.weight(.bold))
                     .foregroundColor(.secondary)
 
-                Text("Alqhazo, M., & Alkhamaiseh, Z. (2025). Effect of delayed auditory feedback "
-                    + "on stuttering-like disfluencies. International Journal of Language & "
-                    + "Communication Disorders, 60(2), e70007.")
-                    .font(.caption)
-                    .foregroundColor(.secondary)
-                    .frame(
-                        maxWidth: .infinity,
-                        alignment: .leading
-                    )
+                Text(
+                    "Alqhazo, M., & Alkhamaiseh, Z. (2025). Effect of delayed auditory feedback on stuttering-like disfluencies. International Journal of Language & Communication Disorders, 60(2), e70007."
+                )
+                .font(.caption)
+                .foregroundColor(.secondary)
+                .frame(
+                    maxWidth: .infinity,
+                    alignment: .leading
+                )
 
                 Link("View study", destination: referenceURL)
                     .font(.caption.weight(.semibold))

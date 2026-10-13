@@ -22,9 +22,7 @@ struct ChallengeResult {
 }
 
 // live speech recognition for challenges
-// listens to the microphone, transcribes on device, and scores which target
-// sound words were spoken. it also flags obvious word repetitions as a simple
-// disfluency hint. this is guidance, not a clinical stutter diagnosis.
+// supports english and spanish speech exercises
 @MainActor
 final class SpeechChallengeRecognizer: ObservableObject {
 
@@ -44,7 +42,10 @@ final class SpeechChallengeRecognizer: ObservableObject {
     @Published var lastResult: ChallengeResult?
 
     private var audioEngine = AVAudioEngine()
-    private let recognizer = SFSpeechRecognizer(locale: Locale(identifier: "en-US"))
+
+    // created for the language of each challenge
+    private var recognizer: SFSpeechRecognizer?
+
     private var request: SFSpeechAudioBufferRecognitionRequest?
     private var task: SFSpeechRecognitionTask?
 
@@ -63,7 +64,16 @@ final class SpeechChallengeRecognizer: ObservableObject {
     }
 
     // begins listening and prepares to score the given prompt
-    func start(prompt: String, patterns: [String]) {
+    func start(
+        prompt: String,
+        patterns: [String],
+        language: String = "en-US"
+    ) {
+
+        // select the recognition language
+        recognizer = SFSpeechRecognizer(
+            locale: Locale(identifier: language)
+        )
 
         guard let recognizer, recognizer.isAvailable else {
             errorMessage = "Speech recognition is not available right now."
@@ -74,20 +84,33 @@ final class SpeechChallengeRecognizer: ObservableObject {
         transcript = ""
         lastResult = nil
         errorMessage = nil
-        targetWords = SpeechChallenge.targetWords(in: prompt, patterns: patterns)
-            .map { $0.lowercased() }
+
+        targetWords = SpeechChallenge.targetWords(
+            in: prompt,
+            patterns: patterns
+        )
+        .map { $0.lowercased() }
 
         // configure the session for recording
         do {
             let session = AVAudioSession.sharedInstance()
-            // allowBluetooth lets a paired Bluetooth headset act as the mic input
-            // (renamed allowBluetoothHFP in iOS 26, which Xcode 16.2 can't see)
+
+            // allowBluetooth supports compatible bluetooth microphones
             try session.setCategory(
                 .playAndRecord,
                 mode: .default,
-                options: [.duckOthers, .defaultToSpeaker, .allowBluetooth]
+                options: [
+                    .duckOthers,
+                    .defaultToSpeaker,
+                    .allowBluetooth
+                ]
             )
-            try session.setActive(true, options: .notifyOthersOnDeactivation)
+
+            try session.setActive(
+                true,
+                options: .notifyOthersOnDeactivation
+            )
+
         } catch {
             errorMessage = "Could not start the microphone."
             return
@@ -96,27 +119,29 @@ final class SpeechChallengeRecognizer: ObservableObject {
         let request = SFSpeechAudioBufferRecognitionRequest()
         request.shouldReportPartialResults = true
 
-        // prefer on-device when available, but allow server fallback so the
-        // Simulator (which lacks the on-device model) can still transcribe
+        // allow server recognition when on-device is unavailable
         request.requiresOnDeviceRecognition = false
+
         self.request = request
 
-        // a fresh engine picks up the current hardware input format, avoiding a
-        // stale-format tap mismatch that can crash after the session sample rate changes
+        // use a fresh engine for the current microphone format
         audioEngine = AVAudioEngine()
-        let input = audioEngine.inputNode
 
-        // read the live input format only after the session is active
+        let input = audioEngine.inputNode
         let format = input.outputFormat(forBus: 0)
 
-        // the mic format can briefly be invalid; bail gracefully instead of crashing
-        guard format.sampleRate > 0, format.channelCount > 0 else {
+        guard format.sampleRate > 0,
+              format.channelCount > 0 else {
+
             errorMessage = "The microphone is not ready yet. Please try again."
             return
         }
 
-        // passing nil uses the node's own bus format, so the tap can never mismatch
-        input.installTap(onBus: 0, bufferSize: 1024, format: nil) { [weak self] buffer, _ in
+        input.installTap(
+            onBus: 0,
+            bufferSize: 1024,
+            format: nil
+        ) { [weak self] buffer, _ in
             self?.request?.append(buffer)
         }
 
@@ -132,15 +157,24 @@ final class SpeechChallengeRecognizer: ObservableObject {
 
         isRecording = true
 
-        task = recognizer.recognitionTask(with: request) { [weak self] result, error in
+        task = recognizer.recognitionTask(
+            with: request
+        ) { [weak self] result, error in
+
             Task { @MainActor in
+
                 if let result {
-                    self?.transcript = result.bestTranscription.formattedString
+                    self?.transcript =
+                        result.bestTranscription.formattedString
                 }
+
                 if let error {
-                    // surface the reason instead of failing silently
-                    print("Speech recognition error: \(error.localizedDescription)")
-                    self?.errorMessage = "Recognition error: \(error.localizedDescription)"
+                    print(
+                        "Speech recognition error: \(error.localizedDescription)"
+                    )
+
+                    self?.errorMessage =
+                        "Recognition error: \(error.localizedDescription)"
                 }
             }
         }
@@ -152,22 +186,36 @@ final class SpeechChallengeRecognizer: ObservableObject {
 
         audioEngine.stop()
         audioEngine.inputNode.removeTap(onBus: 0)
+
         request?.endAudio()
         task?.cancel()
+
         request = nil
         task = nil
+
         isRecording = false
 
         try? AVAudioSession.sharedInstance()
-            .setActive(false, options: .notifyOthersOnDeactivation)
+            .setActive(
+                false,
+                options: .notifyOthersOnDeactivation
+            )
 
-        let result = Self.evaluate(transcript: transcript, targetWords: targetWords)
+        let result = Self.evaluate(
+            transcript: transcript,
+            targetWords: targetWords
+        )
+
         lastResult = result
+
         return result
     }
 
     // scores the transcript against the expected target words
-    private static func evaluate(transcript: String, targetWords: [String]) -> ChallengeResult {
+    private static func evaluate(
+        transcript: String,
+        targetWords: [String]
+    ) -> ChallengeResult {
 
         let spokenWords = transcript
             .lowercased()
@@ -176,11 +224,16 @@ final class SpeechChallengeRecognizer: ObservableObject {
 
         let spokenSet = Set(spokenWords)
 
-        let matched = targetWords.filter { spokenSet.contains($0) }
+        let matched = targetWords.filter {
+            spokenSet.contains($0)
+        }
 
-        // count immediate word repetitions as a simple disfluency hint
+        // count immediate word repetitions
         var repetitions = 0
-        for index in 1..<max(spokenWords.count, 1) where index < spokenWords.count {
+
+        for index in 1..<max(spokenWords.count, 1)
+        where index < spokenWords.count {
+
             if spokenWords[index] == spokenWords[index - 1] {
                 repetitions += 1
             }
